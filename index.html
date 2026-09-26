@@ -83,9 +83,7 @@
           <i class="fa-solid fa-store"></i> Nossa Lojinha
         </button>
         
-        <button onclick="abrirModalAdmin()" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-2 rounded shadow transition flex items-center gap-1.5 ml-2">
-          <i class="fa-solid fa-lock"></i> ADMIN
-        </button>
+        
       </div>
 
     </div>
@@ -321,28 +319,36 @@
   </main>
 
   <!-- RODAPÉ INDIVIDUAL -->
-  <footer class="bg-cotel text-white mt-12 py-8 border-t-4 border-cotel-dark">
-    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
-      <div>
-        <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
-          SOBRE O COTEL
-        </h3>
-        <p id="field-footer-sobre" class="text-teal-100 leading-relaxed text-xs md:text-sm editable-field">
-          O Colégio Técnico de Lorena "Prof. Nelson Pesciotta", vinculado à Escola de Engenharia de Lorena (EEL-USP), é referência em ensino técnico de qualidade. A Gincana é um evento de integração e celebração dos nossos alunos.
-        </p>
-      </div>
-      <div>
-        <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
-          INFORMAÇÕES
-        </h3>
-        <ul class="space-y-2 text-xs md:text-sm text-teal-100">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> <span id="field-footer-endereco" class="editable-field">Estrada Municipal do Campinho, nº 100, Lorena/SP</span></li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-amber-400"></i> <span id="field-footer-email" class="editable-field">cotel@eel.usp.br</span></li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-globe text-amber-400"></i> <span id="field-footer-site" class="editable-field">cotel.eel.usp.br</span></li>
-        </ul>
-      </div>
+<footer class="bg-cotel text-white mt-12 py-8 border-t-4 border-cotel-dark">
+  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+    <div>
+      <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
+        SOBRE O COTEL
+      </h3>
+      <p id="field-footer-sobre" class="text-teal-100 leading-relaxed text-xs md:text-sm editable-field">
+        O Colégio Técnico de Lorena "Prof. Nelson Pesciotta", vinculado à Escola de Engenharia de Lorena (EEL-USP), é referência em ensino técnico de qualidade. A Gincana é um evento de integração e celebração dos nossos alunos.
+      </p>
     </div>
-  </footer>
+    <div>
+      <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
+        INFORMAÇÕES
+      </h3>
+      <ul class="space-y-2 text-xs md:text-sm text-teal-100">
+        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> <span id="field-footer-endereco" class="editable-field">Estrada Municipal do Campinho, nº 100, Lorena/SP</span></li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-amber-400"></i> <span id="field-footer-email" class="editable-field">cotel@eel.usp.br</span></li>
+        <li class="flex items-center gap-2"><i class="fa-solid fa-globe text-amber-400"></i> <span id="field-footer-site" class="editable-field">cotel.eel.usp.br</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ÁREA DE ÁREA RESTRITA / ADMIN NO RODAPÉ -->
+  <div class="max-w-6xl mx-auto px-4 mt-8 pt-4 border-t border-teal-700/50 flex justify-between items-center text-xs text-teal-200">
+    <p>© Gincana COTEL - Todos os direitos reservados</p>
+    <button onclick="abrirModalAdmin()" class="bg-cotel-dark hover:bg-teal-900 text-teal-100 hover:text-white px-3 py-1.5 rounded-lg border border-teal-600 transition flex items-center gap-1.5 font-semibold">
+      <i class="fa-solid fa-lock text-amber-400"></i> Área do Administrador
+    </button>
+  </div>
+</footer>
 
   <!-- MODAL DE ADMINISTRAÇÃO -->
   <div id="modal-admin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
