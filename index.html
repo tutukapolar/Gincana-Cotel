@@ -28,15 +28,39 @@
     .nav-tab:hover {
       opacity: 1;
     }
+
+    /* Estilo para edição individual quando ativo */
+    .editando-ativo {
+      outline: 2px dashed #f57c00 !important;
+      outline-offset: 2px;
+      background-color: #fffde7 !important;
+      cursor: text;
+    }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col justify-between text-gray-800">
 
-  <!-- HEADER ORIGINAL -->
+  <!-- BARRA FLUTUANTE DE SALVAR EDIÇÃO INDIVIDUAL -->
+  <div id="barra-edicao-direta" class="fixed bottom-4 right-4 bg-amber-500 text-white p-4 rounded-xl shadow-2xl z-50 hidden flex items-center gap-3 border-2 border-amber-600">
+    <div class="flex items-center gap-2 font-bold text-sm">
+      <i class="fa-solid fa-pen-to-square text-lg animate-pulse"></i>
+      <span>Edição Individual Ativa</span>
+    </div>
+    <div class="flex gap-2">
+      <button onclick="salvarEdicaoDireta()" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-3 py-2 rounded shadow transition">
+        💾 Salvar Alterações
+      </button>
+      <button onclick="desativarEdicaoDireta()" class="bg-gray-700 hover:bg-gray-800 text-white text-xs font-bold px-3 py-2 rounded shadow transition">
+        Cancelar
+      </button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
   <header class="bg-cotel text-white shadow-md sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
       
-      <!-- LOGO COTEL COM LINK DIRETO E VÁLIDO -->
+      <!-- LOGO COTEL -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="mudarAba('regras')">
         <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1 shadow overflow-hidden">
           <img src="https://cotel.eel.usp.br/sites/files/cotel/publico/noticia/logo%20do%20cotel%20novo.jpg" alt="Logo COTEL" class="w-full h-full object-cover">
@@ -75,44 +99,43 @@
       <div class="border-b border-gray-200 pb-4">
         <h2 class="text-2xl font-extrabold text-cotel uppercase flex items-center gap-2">
           <img src="https://img.icons8.com/emoji/48/chocolate-bar-emoji.png" alt="Chocolate" class="w-8 h-8 object-contain">
-          ARRECADAÇÃO DE CHOCOLATES & REGRAS
+          <span id="field-regras-titulo" class="editable-field">ARRECADAÇÃO DE CHOCOLATES & REGRAS</span>
         </h2>
-        <p class="text-sm text-gray-500">Saiba tudo sobre a gincana solidária em prol do Dia das Crianças</p>
+        <p id="field-regras-subtitulo" class="text-sm text-gray-500 editable-field">Saiba tudo sobre a gincana solidária em prol do Dia das Crianças</p>
       </div>
 
       <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 space-y-4">
-        <p class="text-gray-700 leading-relaxed">
-          A gincana tem como objetivo a <strong>arrecadação de chocolates</strong> para presenteamos as crianças no Dia das Crianças.
+        <p id="field-regras-desc-1" class="text-gray-700 leading-relaxed editable-field">
+          A gincana tem como objetivo a arrecadação de chocolates para presenteamos as crianças no Dia das Crianças.
         </p>
-        <p class="text-gray-700 leading-relaxed">
+        <p id="field-regras-desc-2" class="text-gray-700 leading-relaxed editable-field">
           Cada sala deverá arrecadar chocolates ao longo do período da gincana. A quantidade arrecadada será contabilizada e convertida em pontos. Além disso, teremos o dia dedicado às atividades esportivas. A soma total definirá a sala campeã!
         </p>
 
-        <!-- REGRAS DOS CHOCOLATES COM IMAGENS VÁLIDAS -->
+        <!-- CARDS INDIVIDUAIS DE PONTUAÇÃO -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-          <!-- Saco de Bombom -->
+          
           <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
             <img src="https://img.icons8.com/fluency/96/candy.png" alt="Saco de Bombom" class="w-14 h-14 object-contain mb-2">
-            <h4 class="font-bold text-gray-800">1 Saco de Bombom</h4>
-            <p class="text-xl font-extrabold text-cotel mt-1">4 Pontos</p>
+            <h4 id="field-card1-nome" class="font-bold text-gray-800 editable-field">1 Saco de Bombom</h4>
+            <p id="field-card1-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">4 Pontos</p>
           </div>
 
-          <!-- Caixa de Bombom -->
           <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
             <img src="https://img.icons8.com/fluency/96/gift.png" alt="Caixa de Bombom" class="w-14 h-14 object-contain mb-2">
-            <h4 class="font-bold text-gray-800">1 Caixa de Bombom</h4>
-            <p class="text-xl font-extrabold text-cotel mt-1">2 Pontos</p>
+            <h4 id="field-card2-nome" class="font-bold text-gray-800 editable-field">1 Caixa de Bombom</h4>
+            <p id="field-card2-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">2 Pontos</p>
           </div>
 
-          <!-- Caixa Bis / Hershey's -->
           <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
             <img src="https://img.icons8.com/fluency/96/chocolate-bar.png" alt="Caixa Bis" class="w-14 h-14 object-contain mb-2">
-            <h4 class="font-bold text-gray-800">1 Caixa Bis / Hershey's</h4>
-            <p class="text-xl font-extrabold text-cotel mt-1">1 Ponto</p>
+            <h4 id="field-card3-nome" class="font-bold text-gray-800 editable-field">1 Caixa Bis / Hershey's</h4>
+            <p id="field-card3-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">1 Ponto</p>
           </div>
+
         </div>
 
-        <div class="p-4 bg-teal-50 border border-teal-200 rounded text-center text-sm font-semibold text-cotel">
+        <div id="field-regras-bonus" class="p-4 bg-teal-50 border border-teal-200 rounded text-center text-sm font-semibold text-cotel editable-field">
           🏆 Bónus para as salas com maior arrecadação: 1º Lugar (+3000 pts) | 2º Lugar (+2000 pts) | 3º Lugar (+1000 pts)
         </div>
       </div>
@@ -121,34 +144,36 @@
     <!-- 2ª ABA: PROGRAMAÇÃO & PONTUAÇÃO -->
     <section id="conteudo-programacao" class="space-y-6 hidden">
       <div class="border-b border-gray-200 pb-4">
-        <h2 class="text-2xl font-extrabold text-cotel uppercase flex items-center gap-2">
+        <h2 id="field-prog-titulo" class="text-2xl font-extrabold text-cotel uppercase editable-field">
           🏆 PROGRAMAÇÃO E TABELA DE PONTOS
         </h2>
-        <p class="text-sm text-gray-500">Confira o resumo, os detalhes dos horários e a pontuação do evento</p>
+        <p id="field-prog-subtitulo" class="text-sm text-gray-500 editable-field">
+          Confira o resumo, os detalhes dos horários e a pontuação do evento
+        </p>
       </div>
 
-      <!-- CRONOGRAMA RESUMIDO (MANTIDO) -->
+      <!-- CRONOGRAMA RESUMIDO INDIVIDUAL -->
       <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
           <i class="fa-solid fa-clock text-cotel"></i> Resumo do Dia
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="p-4 bg-teal-50 border-l-4 border-teal-600 rounded">
-            <span class="text-xs font-bold text-teal-800 uppercase block mb-1">Manhã (08:00 às 12:30)</span>
-            <p class="text-sm text-gray-700 font-semibold">Futsal Fem/Masc, Vôlei, Torta na Cara, Pula Saco, Pimbolim e Ovo na Colher</p>
+            <span id="field-resumo-1-titulo" class="text-xs font-bold text-teal-800 uppercase block mb-1 editable-field">Manhã (08:00 às 12:30)</span>
+            <p id="field-resumo-1-desc" class="text-sm text-gray-700 font-semibold editable-field">Futsal Fem/Masc, Vôlei, Torta na Cara, Pula Saco, Pimbolim e Ovo na Colher</p>
           </div>
           <div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
-            <span class="text-xs font-bold text-blue-800 uppercase block mb-1">Tarde (14:00 às 17:30)</span>
-            <p class="text-sm text-gray-700 font-semibold">Final Vôlei, Final Futsal Fem/Masc, Basquete e Queimada</p>
+            <span id="field-resumo-2-titulo" class="text-xs font-bold text-blue-800 uppercase block mb-1 editable-field">Tarde (14:00 às 17:30)</span>
+            <p id="field-resumo-2-desc" class="text-sm text-gray-700 font-semibold editable-field">Final Vôlei, Final Futsal Fem/Masc, Basquete e Queimada</p>
           </div>
           <div class="p-4 bg-amber-50 border-l-4 border-amber-600 rounded">
-            <span class="text-xs font-bold text-amber-800 uppercase block mb-1">Arrecadação</span>
-            <p class="text-sm text-gray-700 font-semibold">Entrega das caixas na secretaria até às 12h00</p>
+            <span id="field-resumo-3-titulo" class="text-xs font-bold text-amber-800 uppercase block mb-1 editable-field">Arrecadação</span>
+            <p id="field-resumo-3-desc" class="text-sm text-gray-700 font-semibold editable-field">Entrega das caixas na secretaria até às 12h00</p>
           </div>
         </div>
       </div>
 
-      <!-- PROGRAMAÇÃO COMPLETA DETALHADA POR HORÁRIOS -->
+      <!-- PROGRAMAÇÃO POR HORÁRIOS -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div class="bg-cotel text-white px-6 py-4">
           <h3 class="font-extrabold uppercase text-lg flex items-center gap-2">
@@ -157,36 +182,34 @@
         </div>
         
         <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-          
           <!-- MANHÃ -->
           <div>
             <h4 class="font-bold text-teal-800 border-b-2 border-teal-600 pb-2 mb-3 uppercase text-sm flex items-center gap-2">
               <i class="fa-solid fa-sun text-amber-500"></i> Manhã
             </h4>
-            <table class="w-full text-xs text-left border-collapse">
-              <thead>
-                <tr class="bg-gray-100 text-gray-700 font-bold border-b">
-                  <th class="p-2">Horário</th>
-                  <th class="p-2">Atividade</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-100 text-gray-700">
-                <tr><td class="p-2 font-semibold text-cotel">08:00h às 08:23h</td><td class="p-2">1º Jogo - Futsal Feminino</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">08:25h às 08:48h</td><td class="p-2">2º Jogo - Futsal Feminino</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">08:50h às 09:13h</td><td class="p-2">3º Jogo - Futsal Feminino</td></tr>
-                <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:00h às 08:23h</td><td class="p-2">1º Jogo - Futsal Masculino</td></tr>
-                <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:25h às 08:48h</td><td class="p-2">2º Jogo - Futsal Masculino</td></tr>
-                <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:50h às 09:13h</td><td class="p-2">3º Jogo - Futsal Masculino</td></tr>
-                <tr class="bg-amber-50 font-bold text-amber-900"><td class="p-2">09:20h às 09:40h</td><td class="p-2">INTERVALO</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">09:40h às 10:10h</td><td class="p-2">1º Jogo - Vôlei Misto</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">10:15h às 10:45h</td><td class="p-2">2º Jogo - Vôlei Misto</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">10:50h às 11:20h</td><td class="p-2">3º Jogo - Vôlei Misto</td></tr>
-                <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Torta na Cara</td></tr>
-                <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Pula Saco</td></tr>
-                <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Ovo na Colher</td></tr>
-                <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Pimbolim</td></tr>
-              </tbody>
-            </table>
+            <div id="field-tabela-manha" class="editable-field">
+              <table class="w-full text-xs text-left border-collapse">
+                <thead>
+                  <tr class="bg-gray-100 text-gray-700 font-bold border-b">
+                    <th class="p-2">Horário</th>
+                    <th class="p-2">Atividade</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-gray-700">
+                  <tr><td class="p-2 font-semibold text-cotel">08:00h às 08:23h</td><td class="p-2">1º Jogo - Futsal Feminino</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">08:25h às 08:48h</td><td class="p-2">2º Jogo - Futsal Feminino</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">08:50h às 09:13h</td><td class="p-2">3º Jogo - Futsal Feminino</td></tr>
+                  <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:00h às 08:23h</td><td class="p-2">1º Jogo - Futsal Masculino</td></tr>
+                  <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:25h às 08:48h</td><td class="p-2">2º Jogo - Futsal Masculino</td></tr>
+                  <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:50h às 09:13h</td><td class="p-2">3º Jogo - Futsal Masculino</td></tr>
+                  <tr class="bg-amber-50 font-bold text-amber-900"><td class="p-2">09:20h às 09:40h</td><td class="p-2">INTERVALO</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">09:40h às 10:10h</td><td class="p-2">1º Jogo - Vôlei Misto</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">10:15h às 10:45h</td><td class="p-2">2º Jogo - Vôlei Misto</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">10:50h às 11:20h</td><td class="p-2">3º Jogo - Vôlei Misto</td></tr>
+                  <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Torta na Cara / Pula Saco / Ovo na Colher / Pimbolim</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <!-- TARDE -->
@@ -194,27 +217,29 @@
             <h4 class="font-bold text-teal-800 border-b-2 border-teal-600 pb-2 mb-3 uppercase text-sm flex items-center gap-2">
               <i class="fa-solid fa-moon text-blue-500"></i> Tarde
             </h4>
-            <table class="w-full text-xs text-left border-collapse">
-              <thead>
-                <tr class="bg-gray-100 text-gray-700 font-bold border-b">
-                  <th class="p-2">Horário</th>
-                  <th class="p-2">Atividade</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-100 text-gray-700">
-                <tr><td class="p-2 font-semibold text-cotel">14:00h às 14:30h</td><td class="p-2 font-bold text-gray-900">Final Vôlei</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">14:40h às 15:03h</td><td class="p-2 font-bold text-gray-900">Final Futsal Feminino</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">14:40h às 15:03h</td><td class="p-2 font-bold text-gray-900">Final Futsal Masculino</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">15:05h às 15:35h</td><td class="p-2">1º Jogo - Basquete</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">15:35h às 16:05h</td><td class="p-2">2º Jogo - Basquete</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">16:05h às 16:35h</td><td class="p-2">3º Jogo - Basquete</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">16:35h às 17:05h</td><td class="p-2 font-bold text-gray-900">Final - Basquete</td></tr>
-                <tr><td class="p-2 font-semibold text-cotel">17:10h</td><td class="p-2">Presença</td></tr>
-                <tr class="bg-amber-100 font-extrabold text-amber-900 text-sm"><td class="p-2.5">17:10h</td><td class="p-2.5">🏆 PREMIAÇÃO</td></tr>
-              </tbody>
-            </table>
+            <div id="field-tabela-tarde" class="editable-field">
+              <table class="w-full text-xs text-left border-collapse">
+                <thead>
+                  <tr class="bg-gray-100 text-gray-700 font-bold border-b">
+                    <th class="p-2">Horário</th>
+                    <th class="p-2">Atividade</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-gray-700">
+                  <tr><td class="p-2 font-semibold text-cotel">14:00h às 14:30h</td><td class="p-2 font-bold text-gray-900">Final Vôlei</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">14:40h às 15:03h</td><td class="p-2 font-bold text-gray-900">Final Futsal Feminino</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">14:40h às 15:03h</td><td class="p-2 font-bold text-gray-900">Final Futsal Masculino</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">15:05h às 15:35h</td><td class="p-2">1º Jogo - Basquete</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">15:35h às 16:05h</td><td class="p-2">2º Jogo - Basquete</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">16:05h às 16:35h</td><td class="p-2">3º Jogo - Basquete</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">16:35h às 17:05h</td><td class="p-2 font-bold text-gray-900">Final - Basquete</td></tr>
+                  <tr><td class="p-2 font-semibold text-cotel">17:10h</td><td class="p-2">Presença</td></tr>
+                  <tr class="bg-amber-100 font-extrabold text-amber-900 text-sm"><td class="p-2.5">17:10h</td><td class="p-2.5">🏆 PREMIAÇÃO</td></tr>
+                </tbody>
+              </table>
+            </div>
 
-            <div class="mt-4 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 font-medium">
+            <div id="field-prog-obs" class="mt-4 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 font-medium editable-field">
               ⚠️ <strong>Obs.:</strong> Se a turma deixar de jogar alguma modalidade, não receberá pontuação por esse esporte.
             </div>
           </div>
@@ -222,12 +247,12 @@
         </div>
       </div>
 
-      <!-- TABELA DE PONTUAÇÃO (MANTIDA) -->
+      <!-- TABELA DE PONTUAÇÃO -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
           <h3 class="font-bold text-gray-800">Pontuação por Modalidade</h3>
         </div>
-        <div class="p-6 overflow-x-auto">
+        <div id="field-tabela-pontos" class="p-6 overflow-x-auto editable-field">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-cotel text-white text-xs uppercase">
@@ -260,42 +285,50 @@
     <section id="conteudo-vendas" class="space-y-6 hidden">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-200 pb-4 gap-4">
         <div>
-          <h2 class="text-2xl font-extrabold text-cotel flex items-center gap-2 uppercase">
+          <h2 id="field-loja-titulo" class="text-2xl font-extrabold text-cotel flex items-center gap-2 uppercase editable-field">
             🛒 ITENS À VENDA NA GINCANA
           </h2>
-          <p class="text-sm text-gray-500">Confira o que estaremos vendendo durante o evento!</p>
+          <p id="field-loja-horario" class="text-sm text-gray-500 editable-field">Iremos vender no intervalo das 9:20h às 10:00h e na parte da tarde!</p>
         </div>
 
-        <!-- BUSCA DE ITENS -->
         <div class="relative w-full md:w-72">
           <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
           <input type="text" id="input-busca" onkeyup="filtrarProdutos()" placeholder="Buscar item..." class="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-600">
         </div>
       </div>
 
-      <!-- LISTA DINÂMICA DE PRODUTOS DO FIREBASE -->
-      <div id="grid-produtos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- Itens inseridos via JavaScript -->
+      <!-- INFORMAÇÃO PIX INDIVIDUAL -->
+      <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-qrcode text-3xl text-cotel"></i>
+          <div>
+            <p id="field-pix-titulo" class="font-bold text-gray-800 editable-field">Pagamento via PIX</p>
+            <p id="field-pix-chave" class="text-gray-600 editable-field">Chave: terceiraocotel2027@gmail.com (KETLEN KLAYANNE POLICARPO DE OLIVEIRA)</p>
+          </div>
+        </div>
+        <span id="field-pix-tag" class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-bold editable-field">Vendas no intervalo e à tarde</span>
       </div>
 
-      <!-- MENSAGEM QUANDO ESTÁ VAZIO -->
+      <!-- LISTA DE PRODUTOS CADASTRADOS NO FIREBASE -->
+      <div id="grid-produtos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
       <div id="loja-vazia" class="hidden py-12 text-center text-gray-400 space-y-3">
         <i class="fa-solid fa-box-open text-5xl opacity-40"></i>
-        <p class="text-base font-medium">Nenhum item cadastrado ou encontrado.</p>
+        <p class="text-base font-medium">Nenhum item cadastrado ou encontrado no Firebase.</p>
       </div>
     </section>
 
   </main>
 
-  <!-- RODAPÉ ORIGINAL -->
+  <!-- RODAPÉ INDIVIDUAL -->
   <footer class="bg-cotel text-white mt-12 py-8 border-t-4 border-cotel-dark">
     <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
       <div>
         <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
           SOBRE O COTEL
         </h3>
-        <p class="text-teal-100 leading-relaxed text-xs md:text-sm">
-          O Colégio Técnico de Lorena "Prof. Nelson Pesciotta", vinculado à <strong>Escola de Engenharia de Lorena (EEL-USP)</strong>, é referência em ensino técnico de qualidade. A Gincana é um evento de integração e celebração dos nossos alunos.
+        <p id="field-footer-sobre" class="text-teal-100 leading-relaxed text-xs md:text-sm editable-field">
+          O Colégio Técnico de Lorena "Prof. Nelson Pesciotta", vinculado à Escola de Engenharia de Lorena (EEL-USP), é referência em ensino técnico de qualidade. A Gincana é um evento de integração e celebração dos nossos alunos.
         </p>
       </div>
       <div>
@@ -303,9 +336,9 @@
           INFORMAÇÕES
         </h3>
         <ul class="space-y-2 text-xs md:text-sm text-teal-100">
-          <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> Estrada Municipal do Campinho, nº 100, Lorena/SP</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-amber-400"></i> cotel@eel.usp.br</li>
-          <li class="flex items-center gap-2"><i class="fa-solid fa-globe text-amber-400"></i> cotel.eel.usp.br</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> <span id="field-footer-endereco" class="editable-field">Estrada Municipal do Campinho, nº 100, Lorena/SP</span></li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-amber-400"></i> <span id="field-footer-email" class="editable-field">cotel@eel.usp.br</span></li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-globe text-amber-400"></i> <span id="field-footer-site" class="editable-field">cotel.eel.usp.br</span></li>
         </ul>
       </div>
     </div>
@@ -315,7 +348,6 @@
   <div id="modal-admin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-gray-100">
       
-      <!-- CABEÇALHO MODAL -->
       <div class="bg-cotel text-white px-6 py-4 flex justify-between items-center">
         <h3 class="font-extrabold uppercase text-lg flex items-center gap-2">
           <i class="fa-solid fa-user-gear"></i> Painel do Administrador
@@ -326,10 +358,9 @@
       </div>
 
       <div class="p-6">
-        
-        <!-- TELA DE LOGIN DO ADMIN -->
+        <!-- LOGIN ADMIN -->
         <div id="admin-login-view" class="space-y-4">
-          <p class="text-xs text-gray-500 text-center">Digite a senha de administrador para gerenciar os itens de venda da Lanchonete.</p>
+          <p class="text-xs text-gray-500 text-center">Digite a senha de administrador para gerenciar o site.</p>
           <div>
             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Senha Admin</label>
             <input type="password" id="admin-pass-input" placeholder="••••••••" class="w-full px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-teal-600 outline-none">
@@ -339,10 +370,30 @@
           </button>
         </div>
 
-        <!-- TELA DE GESTÃO DE VENDAS -->
-        <div id="admin-panel-view" class="hidden space-y-5">
+        <!-- PAINEL ADMIN -->
+        <div id="admin-panel-view" class="hidden space-y-4 max-h-[80vh] overflow-y-auto pr-1">
           
-          <!-- FORMULÁRIO -->
+          <div class="bg-amber-50 border border-amber-200 p-3 rounded-lg text-center space-y-2">
+            <h4 class="font-extrabold text-amber-900 text-sm">✏️ Edição Individual na Tela</h4>
+            <p class="text-xs text-amber-700">Ative para alterar qualquer texto individualmente com um clique direto!</p>
+            <button onclick="ativarEdicaoDireta()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2 px-4 rounded shadow transition">
+              Ativar Edição Visual
+            </button>
+          </div>
+
+          <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg flex items-center justify-between gap-2">
+            <div>
+              <h5 class="font-bold text-xs text-blue-900">Produtos Padrão</h5>
+              <p class="text-[11px] text-blue-700">Cadastra os produtos iniciais no Firebase para você alterar imagens e descrições.</p>
+            </div>
+            <button onclick="popularBancoProdutos()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-1.5 px-3 rounded shadow shrink-0">
+              ⚡ Cadastrar Produtos
+            </button>
+          </div>
+
+          <hr>
+
+          <!-- PRODUTOS FORM -->
           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3">
             <h4 class="font-bold text-sm text-gray-800 uppercase border-b pb-2" id="form-title">
               Adicionar Novo Item de Venda
@@ -351,7 +402,12 @@
             
             <div>
               <label class="block text-xs font-bold text-gray-600">Nome do Produto</label>
-              <input type="text" id="prod-nome" placeholder="Ex: Refrigerante Lata, Pastel, Pipoca" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
+              <input type="text" id="prod-nome" placeholder="Ex: Coxinha, Brownie, Suco" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-600">Descrição / Opções</label>
+              <textarea id="prod-desc" rows="2" placeholder="Ex: Coxinha, Risoles, Hamburgão" class="w-full px-3 py-1.5 border rounded text-sm bg-white"></textarea>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
@@ -360,7 +416,7 @@
                 <input type="number" step="0.50" id="prod-preco" placeholder="5.00" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
               </div>
               <div>
-                <label class="block text-xs font-bold text-gray-600">URL da Imagem (Opcional)</label>
+                <label class="block text-xs font-bold text-gray-600">URL da Imagem</label>
                 <input type="text" id="prod-foto" placeholder="https://..." class="w-full px-3 py-1.5 border rounded text-sm bg-white">
               </div>
             </div>
@@ -375,21 +431,17 @@
             </div>
           </div>
 
-          <!-- LISTA DE ITENS -->
           <div>
-            <h4 class="font-bold text-xs text-gray-500 uppercase mb-2">Itens Cadastrados no Firestore:</h4>
-            <div id="admin-prod-list" class="max-h-48 overflow-y-auto divide-y border rounded-lg bg-white">
-              <!-- Itens listados aqui -->
-            </div>
+            <h4 class="font-bold text-xs text-gray-500 uppercase mb-2">Itens no Banco de Dados:</h4>
+            <div id="admin-prod-list" class="max-h-40 overflow-y-auto divide-y border rounded-lg bg-white"></div>
           </div>
 
-          <!-- ALTERAR SENHA -->
           <div class="pt-2 border-t flex justify-between items-center text-xs">
             <button onclick="alterarSenhaAdmin()" class="text-cotel font-bold hover:underline">
-              🔑 Alterar Senha Admin
+              🔑 Alterar Senha
             </button>
             <button onclick="logoutAdmin()" class="text-red-500 font-bold hover:underline">
-              Sair do Painel
+              Sair
             </button>
           </div>
 
@@ -419,9 +471,18 @@
     const db = getFirestore(app);
 
     let todosProdutos = [];
-    let senhaAtualAdmin = "admin123"; // Senha temporária enquanto carrega do Firebase
+    let senhaAtualAdmin = "admin123";
 
-    // BUSCA A SENHA DIRETO DO FIREBASE ASSIM QUE A PÁGINA ABRE
+    const produtosIniciais = [
+      { nome: "Salgados", preco: 5.00, desc: "Coxinha, Risoles de carne/pizza, Enroladinho de salsicha, Hamburgão e Esfiha de carne", foto: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=400" },
+      { nome: "Brownie", preco: 5.00, desc: "Delicioso brownie caseiro", foto: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400" },
+      { nome: "Copo de Refrigerante", preco: 2.00, desc: "Coca-Cola ou Guaraná (200ml)", foto: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400" },
+      { nome: "Copo de Suco", preco: 2.00, desc: "Uva ou Maracujá (200ml)", foto: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400" },
+      { nome: "Combo 1: Salgado + Refri/Suco", preco: 6.00, desc: "Qualquer salgado + 1 copo de bebida", foto: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400" },
+      { nome: "Combo 2: Brownie + Refri/Suco", preco: 6.00, desc: "1 Brownie + 1 copo de bebida", foto: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400" },
+      { nome: "Combo 3: Salgado + Brownie + Refri/Suco", preco: 10.00, desc: "Combo completo!", foto: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400" }
+    ];
+
     async function carregarSenhaConfig() {
       try {
         const docRef = doc(db, "config", "admin");
@@ -429,28 +490,40 @@
         
         if (docSnap.exists()) {
           const dados = docSnap.data();
-          // Pega o campo 'senha' ou qualquer outro campo de senha que esteja no documento
           senhaAtualAdmin = dados.senha || dados.password || dados.senhaAdmin || "admin123";
-          console.log("Senha sincronizada com o Firebase com sucesso!");
         } else {
-          // Se o documento não existir no Firebase, cria com a senha padrão
           await setDoc(docRef, { senha: "admin123" });
           senhaAtualAdmin = "admin123";
         }
       } catch (e) {
-        console.error("Erro ao carregar senha do Firebase (Verifique as Regras de Segurança):", e);
+        console.error("Erro ao carregar senha:", e);
       }
     }
-    
-    // Executa a busca da senha
     carregarSenhaConfig();
 
-    // ESCUTA PRODUTOS EM TEMPO REAL
+    // LEITURA INDIVIDUAL DE CADA CAMPO DO FIREBASE
+    onSnapshot(doc(db, "config", "textos"), (docSnap) => {
+      if (docSnap.exists()) {
+        const t = docSnap.data();
+        
+        // Percorre cada elemento editável na página e carrega seu valor individual
+        const campos = document.querySelectorAll('.editable-field');
+        campos.forEach(el => {
+          const key = el.id.replace('field-', '');
+          if (t[key] !== undefined) {
+            el.innerHTML = t[key];
+          }
+        });
+      }
+    });
+
+    // ESCUTAR PRODUTOS DO FIREBASE
     onSnapshot(collection(db, "produtos"), (snapshot) => {
       todosProdutos = [];
       snapshot.forEach((doc) => {
         todosProdutos.push({ id: doc.id, ...doc.data() });
       });
+
       renderizarProdutos(todosProdutos);
       renderizarListaAdmin(todosProdutos);
     });
@@ -474,6 +547,7 @@
             <div class="p-4 flex-grow flex flex-col justify-between">
               <div>
                 <h3 class="font-bold text-gray-800 text-base">${prod.nome}</h3>
+                ${prod.desc ? `<p class="text-xs text-gray-500 mt-1">${prod.desc}</p>` : ''}
               </div>
               <div class="mt-3 flex justify-between items-center pt-2 border-t border-gray-100">
                 <span class="text-xs text-gray-400 font-bold uppercase">Preço</span>
@@ -490,23 +564,27 @@
       adminList.innerHTML = '';
 
       if (lista.length === 0) {
-        adminList.innerHTML = '<p class="p-3 text-xs text-gray-400 text-center">Nenhum produto cadastrado.</p>';
+        adminList.innerHTML = '<p class="p-3 text-xs text-gray-400 text-center">Nenhum produto cadastrado. Clique no botão "⚡ Cadastrar Produtos"!</p>';
         return;
       }
 
       lista.forEach(prod => {
+        const fotoTag = prod.foto ? `<img src="${prod.foto}" class="w-8 h-8 rounded object-cover border">` : '';
         adminList.innerHTML += `
-          <div class="p-2.5 flex justify-between items-center text-xs">
-            <div>
-              <span class="font-bold text-gray-800 block">${prod.nome}</span>
-              <span class="text-cotel font-semibold">R$ ${parseFloat(prod.preco).toFixed(2)}</span>
+          <div class="p-2.5 flex justify-between items-center text-xs gap-2">
+            <div class="flex items-center gap-2 overflow-hidden">
+              ${fotoTag}
+              <div class="truncate">
+                <span class="font-bold text-gray-800 block truncate">${prod.nome}</span>
+                <span class="text-cotel font-semibold">R$ ${parseFloat(prod.preco).toFixed(2)}</span>
+              </div>
             </div>
-            <div class="flex gap-2">
-              <button onclick="prepararEdicao('${prod.id}', '${prod.nome}', '${prod.preco}', '${prod.foto || ''}')" class="text-blue-600 hover:text-blue-800 font-bold">
+            <div class="flex gap-2 shrink-0">
+              <button onclick="prepararEdicao('${prod.id}')" class="text-blue-600 hover:text-blue-800 font-bold">
                 <i class="fa-solid fa-pen"></i> Editar
               </button>
               <button onclick="excluirProduto('${prod.id}')" class="text-red-500 hover:text-red-700 font-bold">
-                <i class="fa-solid fa-trash"></i> Excluir
+                <i class="fa-solid fa-trash"></i>
               </button>
             </div>
           </div>
@@ -514,9 +592,23 @@
       });
     };
 
+    window.popularBancoProdutos = async function() {
+      if (confirm("Deseja cadastrar os produtos padrão na base de dados do Firebase?")) {
+        try {
+          for (const item of produtosIniciais) {
+            await addDoc(collection(db, "produtos"), item);
+          }
+          alert("Todos os produtos foram adicionados individualmente ao Firebase!");
+        } catch (e) {
+          alert("Erro ao cadastrar produtos: " + e.message);
+        }
+      }
+    };
+
     window.salvarProduto = async function() {
       const id = document.getElementById('prod-id').value;
       const nome = document.getElementById('prod-nome').value.trim();
+      const desc = document.getElementById('prod-desc').value.trim();
       const preco = parseFloat(document.getElementById('prod-preco').value);
       const foto = document.getElementById('prod-foto').value.trim();
 
@@ -527,43 +619,89 @@
 
       try {
         if (id) {
-          await updateDoc(doc(db, "produtos", id), { nome, preco, foto });
+          await updateDoc(doc(db, "produtos", id), { nome, desc, preco, foto });
         } else {
-          await addDoc(collection(db, "produtos"), { nome, preco, foto });
+          await addDoc(collection(db, "produtos"), { nome, desc, preco, foto });
         }
         limparFormulario();
       } catch (e) {
-        alert("Erro ao salvar produto no Firebase: " + e.message);
+        alert("Erro ao salvar produto: " + e.message);
       }
     };
 
     window.excluirProduto = async function(id) {
-      if (confirm("Tem certeza que deseja excluir este item de venda?")) {
+      if (confirm("Tem certeza que deseja excluir este item?")) {
         await deleteDoc(doc(db, "produtos", id));
       }
     };
 
-    window.prepararEdicao = function(id, nome, preco, foto) {
-      document.getElementById('prod-id').value = id;
-      document.getElementById('prod-nome').value = nome;
-      document.getElementById('prod-preco').value = preco;
-      document.getElementById('prod-foto').value = foto;
+    window.prepararEdicao = function(id) {
+      const prod = todosProdutos.find(p => p.id === id);
+      if (!prod) return;
+
+      document.getElementById('prod-id').value = prod.id;
+      document.getElementById('prod-nome').value = prod.nome;
+      document.getElementById('prod-desc').value = prod.desc || '';
+      document.getElementById('prod-preco').value = prod.preco;
+      document.getElementById('prod-foto').value = prod.foto || '';
       document.getElementById('form-title').innerText = "Editar Item de Venda";
     };
 
     window.limparFormulario = function() {
       document.getElementById('prod-id').value = '';
       document.getElementById('prod-nome').value = '';
+      document.getElementById('prod-desc').value = '';
       document.getElementById('prod-preco').value = '';
       document.getElementById('prod-foto').value = '';
       document.getElementById('form-title').innerText = "Adicionar Novo Item de Venda";
     };
 
-    // VALIDAÇÃO DA SENHA DE LOGIN
-    window.loginAdmin = async function() {
-      // Garante que busca a senha mais atualizada do Firebase antes de verificar
-      await carregarSenhaConfig();
+    /* MODO DE EDIÇÃO INDIVIDUAL DIRETA NA PÁGINA */
+    window.ativarEdicaoDireta = function() {
+      fecharModalAdmin();
+      document.getElementById('barra-edicao-direta').classList.remove('hidden');
       
+      const campos = document.querySelectorAll('.editable-field');
+      campos.forEach(el => {
+        el.setAttribute('contenteditable', 'true');
+        el.classList.add('editando-ativo');
+      });
+
+      alert("Modo de Edição Individual Ativo!\n\nCada texto destacado possui edição independente. Clique no trecho desejado para modificar e depois em 'Salvar Alterações'.");
+    };
+
+    window.desativarEdicaoDireta = function() {
+      document.getElementById('barra-edicao-direta').classList.add('hidden');
+      
+      const campos = document.querySelectorAll('.editable-field');
+      campos.forEach(el => {
+        el.removeAttribute('contenteditable');
+        el.classList.remove('editando-ativo');
+      });
+    };
+
+    // SALVAMENTO MAPEADO CAMPO A CAMPO
+    window.salvarEdicaoDireta = async function() {
+      try {
+        const dadosParaSalvar = {};
+        const campos = document.querySelectorAll('.editable-field');
+        
+        campos.forEach(el => {
+          const key = el.id.replace('field-', '');
+          dadosParaSalvar[key] = el.innerHTML;
+        });
+
+        await setDoc(doc(db, "config", "textos"), dadosParaSalvar, { merge: true });
+        
+        desativarEdicaoDireta();
+        alert("Todos os campos individuais foram salvos no Firebase com sucesso!");
+      } catch (e) {
+        alert("Erro ao salvar no Firebase: " + e.message);
+      }
+    };
+
+    window.loginAdmin = async function() {
+      await carregarSenhaConfig();
       const pass = document.getElementById('admin-pass-input').value;
       if (pass === senhaAtualAdmin) {
         document.getElementById('admin-login-view').classList.add('hidden');
@@ -584,14 +722,14 @@
       if (nova && nova.trim().length >= 4) {
         senhaAtualAdmin = nova.trim();
         await setDoc(doc(db, "config", "admin"), { senha: senhaAtualAdmin });
-        alert("Senha de Administrador alterada com sucesso no Firebase!");
+        alert("Senha de Administrador alterada com sucesso!");
       } else if (nova) {
         alert("A senha deve ter pelo menos 4 caracteres.");
       }
     };
   </script>
 
-  <!-- SCRIPT DE NAVEGAÇÃO -->
+  <!-- SCRIPT DE NAVEGAÇÃO DA PÁGINA -->
   <script>
     function mudarAba(aba) {
       document.getElementById('conteudo-regras').classList.add('hidden');
