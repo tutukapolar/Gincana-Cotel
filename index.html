@@ -124,13 +124,13 @@
         <h2 class="text-2xl font-extrabold text-cotel uppercase flex items-center gap-2">
           🏆 PROGRAMAÇÃO E TABELA DE PONTOS
         </h2>
-        <p class="text-sm text-gray-500">Confira os horários e pontuações das modalidades no dia 30/09/2026</p>
+        <p class="text-sm text-gray-500">Confira o resumo, os detalhes dos horários e a pontuação do evento</p>
       </div>
 
-      <!-- CRONOGRAMA -->
+      <!-- CRONOGRAMA RESUMIDO (MANTIDO) -->
       <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-clock text-cotel"></i> Cronograma do Dia (das 8h às 17h30)
+          <i class="fa-solid fa-clock text-cotel"></i> Resumo do Dia
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="p-4 bg-teal-50 border-l-4 border-teal-600 rounded">
@@ -148,7 +148,81 @@
         </div>
       </div>
 
-      <!-- TABELA DE PONTUAÇÃO -->
+      <!-- PROGRAMAÇÃO COMPLETA DETALHADA POR HORÁRIOS -->
+      <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div class="bg-cotel text-white px-6 py-4">
+          <h3 class="font-extrabold uppercase text-lg flex items-center gap-2">
+            <i class="fa-solid fa-calendar-days"></i> Programação Completa por Horário
+          </h3>
+        </div>
+        
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- MANHÃ -->
+          <div>
+            <h4 class="font-bold text-teal-800 border-b-2 border-teal-600 pb-2 mb-3 uppercase text-sm flex items-center gap-2">
+              <i class="fa-solid fa-sun text-amber-500"></i> Manhã
+            </h4>
+            <table class="w-full text-xs text-left border-collapse">
+              <thead>
+                <tr class="bg-gray-100 text-gray-700 font-bold border-b">
+                  <th class="p-2">Horário</th>
+                  <th class="p-2">Atividade</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 text-gray-700">
+                <tr><td class="p-2 font-semibold text-cotel">08:00h às 08:23h</td><td class="p-2">1º Jogo - Futsal Feminino</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">08:25h às 08:48h</td><td class="p-2">2º Jogo - Futsal Feminino</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">08:50h às 09:13h</td><td class="p-2">3º Jogo - Futsal Feminino</td></tr>
+                <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:00h às 08:23h</td><td class="p-2">1º Jogo - Futsal Masculino</td></tr>
+                <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:25h às 08:48h</td><td class="p-2">2º Jogo - Futsal Masculino</td></tr>
+                <tr class="bg-gray-50"><td class="p-2 font-semibold text-cotel">08:50h às 09:13h</td><td class="p-2">3º Jogo - Futsal Masculino</td></tr>
+                <tr class="bg-amber-50 font-bold text-amber-900"><td class="p-2">09:20h às 09:40h</td><td class="p-2">INTERVALO</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">09:40h às 10:10h</td><td class="p-2">1º Jogo - Vôlei Misto</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">10:15h às 10:45h</td><td class="p-2">2º Jogo - Vôlei Misto</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">10:50h às 11:20h</td><td class="p-2">3º Jogo - Vôlei Misto</td></tr>
+                <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Torta na Cara</td></tr>
+                <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Pula Saco</td></tr>
+                <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Ovo na Colher</td></tr>
+                <tr class="bg-teal-50"><td class="p-2 font-semibold text-cotel">11:25h às 12:30h</td><td class="p-2">Pimbolim</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- TARDE -->
+          <div>
+            <h4 class="font-bold text-teal-800 border-b-2 border-teal-600 pb-2 mb-3 uppercase text-sm flex items-center gap-2">
+              <i class="fa-solid fa-moon text-blue-500"></i> Tarde
+            </h4>
+            <table class="w-full text-xs text-left border-collapse">
+              <thead>
+                <tr class="bg-gray-100 text-gray-700 font-bold border-b">
+                  <th class="p-2">Horário</th>
+                  <th class="p-2">Atividade</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 text-gray-700">
+                <tr><td class="p-2 font-semibold text-cotel">14:00h às 14:30h</td><td class="p-2 font-bold text-gray-900">Final Vôlei</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">14:40h às 15:03h</td><td class="p-2 font-bold text-gray-900">Final Futsal Feminino</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">14:40h às 15:03h</td><td class="p-2 font-bold text-gray-900">Final Futsal Masculino</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">15:05h às 15:35h</td><td class="p-2">1º Jogo - Basquete</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">15:35h às 16:05h</td><td class="p-2">2º Jogo - Basquete</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">16:05h às 16:35h</td><td class="p-2">3º Jogo - Basquete</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">16:35h às 17:05h</td><td class="p-2 font-bold text-gray-900">Final - Basquete</td></tr>
+                <tr><td class="p-2 font-semibold text-cotel">17:10h</td><td class="p-2">Presença</td></tr>
+                <tr class="bg-amber-100 font-extrabold text-amber-900 text-sm"><td class="p-2.5">17:10h</td><td class="p-2.5">🏆 PREMIAÇÃO</td></tr>
+              </tbody>
+            </table>
+
+            <div class="mt-4 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 font-medium">
+              ⚠️ <strong>Obs.:</strong> Se a turma deixar de jogar alguma modalidade, não receberá pontuação por esse esporte.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TABELA DE PONTUAÇÃO (MANTIDA) -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
           <h3 class="font-bold text-gray-800">Pontuação por Modalidade</h3>
@@ -181,7 +255,7 @@
         </div>
       </div>
     </section>
-
+    
     <!-- 3ª ABA: NOSSA LOJINHA / VENDAS -->
     <section id="conteudo-vendas" class="space-y-6 hidden">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-200 pb-4 gap-4">
@@ -516,7 +590,7 @@
       }
     };
   </script>
-  
+
   <!-- SCRIPT DE NAVEGAÇÃO -->
   <script>
     function mudarAba(aba) {
