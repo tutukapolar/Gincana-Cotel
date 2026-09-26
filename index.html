@@ -82,8 +82,6 @@
         <button onclick="mudarAba('vendas')" id="tab-vendas" class="nav-tab py-2 px-3 flex items-center gap-2">
           <i class="fa-solid fa-store"></i> Nossa Lojinha
         </button>
-        
-        
       </div>
 
     </div>
@@ -313,36 +311,36 @@
   </main>
 
   <!-- RODAPÉ INDIVIDUAL -->
-<footer class="bg-cotel text-white mt-12 py-8 border-t-4 border-cotel-dark">
-  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
-    <div>
-      <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
-        SOBRE O COTEL
-      </h3>
-      <p id="field-footer-sobre" class="text-teal-100 leading-relaxed text-xs md:text-sm editable-field">
-        O Colégio Técnico de Lorena "Prof. Nelson Pesciotta", vinculado à Escola de Engenharia de Lorena (EEL-USP), é referência em ensino técnico de qualidade. A Gincana é um evento de integração e celebração dos nossos alunos.
-      </p>
+  <footer class="bg-cotel text-white mt-12 py-8 border-t-4 border-cotel-dark">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+      <div>
+        <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
+          SOBRE O COTEL
+        </h3>
+        <p id="field-footer-sobre" class="text-teal-100 leading-relaxed text-xs md:text-sm editable-field">
+          O Colégio Técnico de Lorena "Prof. Nelson Pesciotta", vinculado à Escola de Engenharia de Lorena (EEL-USP), é referência em ensino técnico de qualidade. A Gincana é um evento de integração e celebração dos nossos alunos.
+        </p>
+      </div>
+      <div>
+        <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
+          INFORMAÇÕES
+        </h3>
+        <ul class="space-y-2 text-xs md:text-sm text-teal-100">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> <span id="field-footer-endereco" class="editable-field">Estrada Municipal do Campinho, nº 100, Lorena/SP</span></li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-amber-400"></i> <span id="field-footer-email" class="editable-field">cotel@eel.usp.br</span></li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-globe text-amber-400"></i> <span id="field-footer-site" class="editable-field">cotel.eel.usp.br</span></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h3 class="font-bold text-base tracking-wider uppercase mb-3 border-b border-teal-600 pb-2">
-        INFORMAÇÕES
-      </h3>
-      <ul class="space-y-2 text-xs md:text-sm text-teal-100">
-        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> <span id="field-footer-endereco" class="editable-field">Estrada Municipal do Campinho, nº 100, Lorena/SP</span></li>
-        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-amber-400"></i> <span id="field-footer-email" class="editable-field">cotel@eel.usp.br</span></li>
-        <li class="flex items-center gap-2"><i class="fa-solid fa-globe text-amber-400"></i> <span id="field-footer-site" class="editable-field">cotel.eel.usp.br</span></li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- ÁREA DE ÁREA RESTRITA / ADMIN NO RODAPÉ -->
-  <div class="max-w-6xl mx-auto px-4 mt-8 pt-4 border-t border-teal-700/50 flex justify-between items-center text-xs text-teal-200">
-    <p>© Gincana COTEL - Todos os direitos reservados</p>
-    <button onclick="abrirModalAdmin()" class="bg-cotel-dark hover:bg-teal-900 text-teal-100 hover:text-white px-3 py-1.5 rounded-lg border border-teal-600 transition flex items-center gap-1.5 font-semibold">
-      <i class="fa-solid fa-lock text-amber-400"></i> Área do Administrador
-    </button>
-  </div>
-</footer>
+    <!-- ÁREA DE ÁREA RESTRITA / ADMIN NO RODAPÉ -->
+    <div class="max-w-6xl mx-auto px-4 mt-8 pt-4 border-t border-teal-700/50 flex justify-between items-center text-xs text-teal-200">
+      <p>© Gincana COTEL - Todos os direitos reservados</p>
+      <button onclick="abrirModalAdmin()" class="bg-cotel-dark hover:bg-teal-900 text-teal-100 hover:text-white px-3 py-1.5 rounded-lg border border-teal-600 transition flex items-center gap-1.5 font-semibold">
+        <i class="fa-solid fa-lock text-amber-400"></i> Área do Administrador
+      </button>
+    </div>
+  </footer>
 
   <!-- MODAL DE ADMINISTRAÇÃO -->
   <div id="modal-admin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -410,13 +408,17 @@
               <textarea id="prod-desc" rows="2" placeholder="Ex: Coxinha, Risoles, Hamburgão" class="w-full px-3 py-1.5 border rounded text-sm bg-white"></textarea>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-gray-600">Ordem</label>
+                <input type="number" id="prod-ordem" placeholder="1" value="1" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
+              </div>
               <div>
                 <label class="block text-xs font-bold text-gray-600">Preço (R$)</label>
                 <input type="number" step="0.50" id="prod-preco" placeholder="5.00" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
               </div>
               <div>
-                <label class="block text-xs font-bold text-gray-600">URL da Imagem</label>
+                <label class="block text-xs font-bold text-gray-600">URL Imagem</label>
                 <input type="text" id="prod-foto" placeholder="https://..." class="w-full px-3 py-1.5 border rounded text-sm bg-white">
               </div>
             </div>
@@ -474,13 +476,13 @@
     let senhaAtualAdmin = "admin123";
 
     const produtosIniciais = [
-      { nome: "Salgados", preco: 5.00, desc: "Coxinha, Risoles de carne/pizza, Enroladinho de salsicha, Hamburgão e Esfiha de carne", foto: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=400" },
-      { nome: "Brownie", preco: 5.00, desc: "Delicioso brownie caseiro", foto: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400" },
-      { nome: "Copo de Refrigerante", preco: 2.00, desc: "Coca-Cola ou Guaraná (200ml)", foto: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400" },
-      { nome: "Copo de Suco", preco: 2.00, desc: "Uva ou Maracujá (200ml)", foto: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400" },
-      { nome: "Combo 1: Salgado + Refri/Suco", preco: 6.00, desc: "Qualquer salgado + 1 copo de bebida", foto: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400" },
-      { nome: "Combo 2: Brownie + Refri/Suco", preco: 6.00, desc: "1 Brownie + 1 copo de bebida", foto: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400" },
-      { nome: "Combo 3: Salgado + Brownie + Refri/Suco", preco: 10.00, desc: "Combo completo!", foto: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400" }
+      { ordem: 1, nome: "Salgados", preco: 5.00, desc: "Coxinha, Risoles de carne/pizza, Enroladinho de salsicha, Hamburgão e Esfiha de carne", foto: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=400" },
+      { ordem: 2, nome: "Brownie", preco: 5.00, desc: "Delicioso brownie caseiro", foto: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400" },
+      { ordem: 3, nome: "Copo de Refrigerante", preco: 2.00, desc: "Coca-Cola ou Guaraná (200ml)", foto: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400" },
+      { ordem: 4, nome: "Copo de Suco", preco: 2.00, desc: "Uva ou Maracujá (200ml)", foto: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400" },
+      { ordem: 5, nome: "Combo 1: Salgado + Refri/Suco", preco: 6.00, desc: "Qualquer salgado + 1 copo de bebida", foto: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400" },
+      { ordem: 6, nome: "Combo 2: Brownie + Refri/Suco", preco: 6.00, desc: "1 Brownie + 1 copo de bebida", foto: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400" },
+      { ordem: 7, nome: "Combo 3: Salgado + Brownie + Refri/Suco", preco: 10.00, desc: "Combo completo!", foto: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400" }
     ];
 
     async function carregarSenhaConfig() {
@@ -517,12 +519,15 @@
       }
     });
 
-    // ESCUTAR PRODUTOS DO FIREBASE
+    // ESCUTAR PRODUTOS DO FIREBASE E ORDENAR
     onSnapshot(collection(db, "produtos"), (snapshot) => {
       todosProdutos = [];
       snapshot.forEach((doc) => {
         todosProdutos.push({ id: doc.id, ...doc.data() });
       });
+
+      // Ordena do menor número de ordem para o maior
+      todosProdutos.sort((a, b) => (Number(a.ordem) || 999) - (Number(b.ordem) || 999));
 
       renderizarProdutos(todosProdutos);
       renderizarListaAdmin(todosProdutos);
@@ -570,9 +575,11 @@
 
       lista.forEach(prod => {
         const fotoTag = prod.foto ? `<img src="${prod.foto}" class="w-8 h-8 rounded object-cover border">` : '';
+        const numOrdem = prod.ordem || '-';
         adminList.innerHTML += `
           <div class="p-2.5 flex justify-between items-center text-xs gap-2">
             <div class="flex items-center gap-2 overflow-hidden">
+              <span class="bg-teal-100 text-cotel font-bold px-2 py-0.5 rounded text-[10px]">#${numOrdem}</span>
               ${fotoTag}
               <div class="truncate">
                 <span class="font-bold text-gray-800 block truncate">${prod.nome}</span>
@@ -611,6 +618,7 @@
       const desc = document.getElementById('prod-desc').value.trim();
       const preco = parseFloat(document.getElementById('prod-preco').value);
       const foto = document.getElementById('prod-foto').value.trim();
+      const ordem = parseInt(document.getElementById('prod-ordem').value) || 1;
 
       if (!nome || isNaN(preco)) {
         alert("Preencha pelo menos o Nome e o Preço do produto!");
@@ -619,9 +627,9 @@
 
       try {
         if (id) {
-          await updateDoc(doc(db, "produtos", id), { nome, desc, preco, foto });
+          await updateDoc(doc(db, "produtos", id), { nome, desc, preco, foto, ordem });
         } else {
-          await addDoc(collection(db, "produtos"), { nome, desc, preco, foto });
+          await addDoc(collection(db, "produtos"), { nome, desc, preco, foto, ordem });
         }
         limparFormulario();
       } catch (e) {
@@ -644,6 +652,7 @@
       document.getElementById('prod-desc').value = prod.desc || '';
       document.getElementById('prod-preco').value = prod.preco;
       document.getElementById('prod-foto').value = prod.foto || '';
+      document.getElementById('prod-ordem').value = prod.ordem || 1;
       document.getElementById('form-title').innerText = "Editar Item de Venda";
     };
 
@@ -653,6 +662,7 @@
       document.getElementById('prod-desc').value = '';
       document.getElementById('prod-preco').value = '';
       document.getElementById('prod-foto').value = '';
+      document.getElementById('prod-ordem').value = '1';
       document.getElementById('form-title').innerText = "Adicionar Novo Item de Venda";
     };
 
@@ -742,15 +752,6 @@
 
       document.getElementById('conteudo-' + aba).classList.remove('hidden');
       document.getElementById('tab-' + aba).classList.add('active');
-    }
-
-    function filtrarProdutos() {
-      const termo = document.getElementById('input-busca').value.toLowerCase();
-      const cards = document.querySelectorAll('#grid-produtos > div');
-      cards.forEach(card => {
-        const texto = card.innerText.toLowerCase();
-        card.style.display = texto.includes(termo) ? 'flex' : 'none';
-      });
     }
 
     function abrirModalAdmin() {
