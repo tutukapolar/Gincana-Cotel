@@ -62,8 +62,8 @@
       
       <!-- LOGO COTEL -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="mudarAba('regras')">
-        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1 shadow overflow-hidden">
-          <img src="https://cotel.eel.usp.br/sites/files/cotel/publico/noticia/logo%20do%20cotel%20novo.jpg" alt="Logo COTEL" class="w-full h-full object-cover">
+        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 shadow overflow-hidden">
+          <img src="https://cotel.eel.usp.br/sites/files/cotel/publico/noticia/logo%20do%20cotel%20novo.jpg" alt="Logo COTEL" class="w-full h-full object-contain">
         </div>
         <div>
           <h1 class="text-xl font-extrabold tracking-wide uppercase leading-none">GINCANA COTEL</h1>
@@ -112,19 +112,19 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
           
           <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
-            <img src="https://img.icons8.com/fluency/96/candy.png" alt="Saco de Bombom" class="w-14 h-14 object-contain mb-2">
+            <img src="https://img.icons8.com/fluency/96/candy.png" alt="Saco de Bombom" class="w-20 h-20 object-contain mb-2">
             <h4 id="field-card1-nome" class="font-bold text-gray-800 editable-field">1 Saco de Bombom</h4>
             <p id="field-card1-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">4 Pontos</p>
           </div>
 
           <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
-            <img src="https://img.icons8.com/fluency/96/gift.png" alt="Caixa de Bombom" class="w-14 h-14 object-contain mb-2">
+            <img src="https://img.icons8.com/fluency/96/gift.png" alt="Caixa de Bombom" class="w-20 h-20 object-contain mb-2">
             <h4 id="field-card2-nome" class="font-bold text-gray-800 editable-field">1 Caixa de Bombom</h4>
             <p id="field-card2-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">2 Pontos</p>
           </div>
 
           <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
-            <img src="https://img.icons8.com/fluency/96/chocolate-bar.png" alt="Caixa Bis" class="w-14 h-14 object-contain mb-2">
+            <img src="https://img.icons8.com/fluency/96/chocolate-bar.png" alt="Caixa Bis" class="w-20 h-20 object-contain mb-2">
             <h4 id="field-card3-nome" class="font-bold text-gray-800 editable-field">1 Caixa Bis / Hershey's</h4>
             <p id="field-card3-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">1 Ponto</p>
           </div>
@@ -545,10 +545,12 @@
       vazia.classList.add('hidden');
 
       lista.forEach(prod => {
-        const fotoUrl = prod.foto || 'https://via.placeholder.com/200x150?text=Sem+Foto';
+        const fotoUrl = prod.foto || 'https://via.placeholder.com/300x200?text=Sem+Foto';
         grid.innerHTML += `
           <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition">
-            <img src="${fotoUrl}" alt="${prod.nome}" class="w-full h-36 object-cover bg-gray-100">
+            <div class="w-full h-52 bg-gray-50 flex items-center justify-center p-2 border-b border-gray-100">
+              <img src="${fotoUrl}" alt="${prod.nome}" class="w-full h-full object-contain">
+            </div>
             <div class="p-4 flex-grow flex flex-col justify-between">
               <div>
                 <h3 class="font-bold text-gray-800 text-base">${prod.nome}</h3>
