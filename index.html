@@ -33,20 +33,26 @@
     .editando-ativo {
       outline: 2px dashed #f57c00 !important;
       outline-offset: 2px;
-      background-color: #fffde7 !important;
       cursor: text;
+    }
+
+    .box-personalizavel {
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col justify-between text-gray-800">
 
-  <!-- BARRA FLUTUANTE DE SALVAR EDIÇÃO INDIVIDUAL -->
-  <div id="barra-edicao-direta" class="fixed bottom-4 right-4 bg-amber-500 text-white p-4 rounded-xl shadow-2xl z-50 hidden flex items-center gap-3 border-2 border-amber-600">
+  <!-- BARRA FLUTUANTE DE SALVAR EDIÇÃO INDIVIDUAL E CORES -->
+  <div id="barra-edicao-direta" class="fixed bottom-4 right-4 bg-amber-500 text-white p-4 rounded-xl shadow-2xl z-50 hidden flex flex-col sm:flex-row items-center gap-3 border-2 border-amber-600">
     <div class="flex items-center gap-2 font-bold text-sm">
       <i class="fa-solid fa-pen-to-square text-lg animate-pulse"></i>
-      <span>Edição Individual Ativa</span>
+      <span>Edição Ativa</span>
     </div>
-    <div class="flex gap-2">
+    <div class="flex flex-wrap gap-2">
+      <button onclick="abrirPainelCores()" class="bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold px-3 py-2 rounded shadow transition flex items-center gap-1">
+        🎨 Personalizar Cores
+      </button>
       <button onclick="salvarEdicaoDireta()" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-3 py-2 rounded shadow transition">
         💾 Salvar Alterações
       </button>
@@ -100,7 +106,7 @@
         <p id="field-regras-subtitulo" class="text-sm text-gray-500 editable-field">Saiba tudo sobre a gincana solidária em prol do Dia das Crianças</p>
       </div>
 
-      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 space-y-4">
+      <div id="box-regras-principal" class="box-personalizavel bg-white p-6 rounded-lg shadow-sm border border-gray-200 space-y-4">
         <p id="field-regras-desc-1" class="text-gray-700 leading-relaxed editable-field">
           A gincana tem como objetivo a arrecadação de chocolates para presenteamos as crianças no Dia das Crianças.
         </p>
@@ -111,19 +117,19 @@
         <!-- CARDS INDIVIDUAIS DE PONTUAÇÃO -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
           
-          <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
+          <div id="box-card1" class="box-personalizavel p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
             <img src="https://img.icons8.com/fluency/96/candy.png" alt="Saco de Bombom" class="w-20 h-20 object-contain mb-2">
             <h4 id="field-card1-nome" class="font-bold text-gray-800 editable-field">1 Saco de Bombom</h4>
             <p id="field-card1-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">4 Pontos</p>
           </div>
 
-          <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
+          <div id="box-card2" class="box-personalizavel p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
             <img src="https://img.icons8.com/fluency/96/gift.png" alt="Caixa de Bombom" class="w-20 h-20 object-contain mb-2">
             <h4 id="field-card2-nome" class="font-bold text-gray-800 editable-field">1 Caixa de Bombom</h4>
             <p id="field-card2-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">2 Pontos</p>
           </div>
 
-          <div class="p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
+          <div id="box-card3" class="box-personalizavel p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
             <img src="https://img.icons8.com/fluency/96/chocolate-bar.png" alt="Caixa Bis" class="w-20 h-20 object-contain mb-2">
             <h4 id="field-card3-nome" class="font-bold text-gray-800 editable-field">1 Caixa Bis / Hershey's</h4>
             <p id="field-card3-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">1 Ponto</p>
@@ -131,8 +137,8 @@
 
         </div>
 
-        <div id="field-regras-bonus" class="p-4 bg-teal-50 border border-teal-200 rounded text-center text-sm font-semibold text-cotel editable-field">
-          🏆 Bónus para as salas com maior arrecadação: 1º Lugar (+3000 pts) | 2º Lugar (+2000 pts) | 3º Lugar (+1000 pts)
+        <div id="box-regras-bonus" class="box-personalizavel p-4 bg-teal-50 border border-teal-200 rounded text-center text-sm font-semibold text-cotel">
+          <span id="field-regras-bonus" class="editable-field">🏆 Bónus para as salas com maior arrecadação: 1º Lugar (+3000 pts) | 2º Lugar (+2000 pts) | 3º Lugar (+1000 pts)</span>
         </div>
       </div>
     </section>
@@ -154,15 +160,15 @@
           <i class="fa-solid fa-clock text-cotel"></i> Resumo do Dia
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="p-4 bg-teal-50 border-l-4 border-teal-600 rounded">
+          <div id="box-resumo-1" class="box-personalizavel p-4 bg-teal-50 border-l-4 border-teal-600 rounded">
             <span id="field-resumo-1-titulo" class="text-xs font-bold text-teal-800 uppercase block mb-1 editable-field">Manhã (08:00 às 12:30)</span>
             <p id="field-resumo-1-desc" class="text-sm text-gray-700 font-semibold editable-field">Futsal Fem/Masc, Vôlei, Torta na Cara, Pula Saco, Pimbolim e Ovo na Colher</p>
           </div>
-          <div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
+          <div id="box-resumo-2" class="box-personalizavel p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
             <span id="field-resumo-2-titulo" class="text-xs font-bold text-blue-800 uppercase block mb-1 editable-field">Tarde (14:00 às 17:30)</span>
             <p id="field-resumo-2-desc" class="text-sm text-gray-700 font-semibold editable-field">Final Vôlei, Final Futsal Fem/Masc, Basquete e Queimada</p>
           </div>
-          <div class="p-4 bg-amber-50 border-l-4 border-amber-600 rounded">
+          <div id="box-resumo-3" class="box-personalizavel p-4 bg-amber-50 border-l-4 border-amber-600 rounded">
             <span id="field-resumo-3-titulo" class="text-xs font-bold text-amber-800 uppercase block mb-1 editable-field">Arrecadação</span>
             <p id="field-resumo-3-desc" class="text-sm text-gray-700 font-semibold editable-field">Entrega das caixas na secretaria até às 12h00</p>
           </div>
@@ -235,8 +241,8 @@
               </table>
             </div>
 
-            <div id="field-prog-obs" class="mt-4 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 font-medium editable-field">
-              ⚠️ <strong>Obs.:</strong> Se a turma deixar de jogar alguma modalidade, não receberá pontuação por esse esporte.
+            <div id="box-prog-obs" class="box-personalizavel mt-4 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 font-medium">
+              <span id="field-prog-obs" class="editable-field">⚠️ <strong>Obs.:</strong> Se a turma deixar de jogar alguma modalidade, não receberá pontuação por esse esporte.</span>
             </div>
           </div>
 
@@ -279,7 +285,7 @@
     
     <!-- 3ª ABA: NOSSA LOJINHA / VENDAS -->
     <section id="conteudo-vendas" class="space-y-6 hidden">
-      <!-- CABEÇALHO DA LOJA SEM A BARRA DE BUSCA -->
+      <!-- CABEÇALHO DA LOJA -->
       <div class="border-b border-gray-200 pb-4">
         <h2 id="field-loja-titulo" class="text-2xl font-extrabold text-cotel flex items-center gap-2 uppercase editable-field">
           🛒 ITENS À VENDA NA GINCANA
@@ -288,7 +294,7 @@
       </div>
 
       <!-- INFORMAÇÃO PIX INDIVIDUAL -->
-      <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+      <div id="box-pix" class="box-personalizavel bg-blue-50 border border-blue-200 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
         <div class="flex items-center gap-3">
           <i class="fa-solid fa-qrcode text-3xl text-cotel"></i>
           <div>
@@ -333,7 +339,7 @@
       </div>
     </div>
 
-    <!-- ÁREA DE ÁREA RESTRITA / ADMIN NO RODAPÉ -->
+    <!-- ÁREA DE RESTRITA / ADMIN NO RODAPÉ -->
     <div class="max-w-6xl mx-auto px-4 mt-8 pt-4 border-t border-teal-700/50 flex justify-between items-center text-xs text-teal-200">
       <p>© Gincana COTEL - Todos os direitos reservados</p>
       <button onclick="abrirModalAdmin()" class="bg-cotel-dark hover:bg-teal-900 text-teal-100 hover:text-white px-3 py-1.5 rounded-lg border border-teal-600 transition flex items-center gap-1.5 font-semibold">
@@ -341,6 +347,58 @@
       </button>
     </div>
   </footer>
+
+  <!-- MODAL DE CORES DA CAIXA SELECIONADA -->
+  <div id="modal-cores" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-gray-100">
+      <div class="bg-purple-700 text-white px-6 py-4 flex justify-between items-center">
+        <h3 class="font-extrabold uppercase text-base flex items-center gap-2">
+          🎨 Escolher Cores das Caixas
+        </h3>
+        <button onclick="fecharPainelCores()" class="text-purple-200 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Selecione a Caixa / Bloco</label>
+          <select id="select-box-target" onchange="carregarCoresBoxSelecionada()" class="w-full px-3 py-2 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-purple-600 outline-none">
+            <option value="box-regras-principal">Caixa Principal de Regras</option>
+            <option value="box-card1">Card 1 - Saco de Bombom</option>
+            <option value="box-card2">Card 2 - Caixa de Bombom</option>
+            <option value="box-card3">Card 3 - Bis / Hershey's</option>
+            <option value="box-regras-bonus">Faixa de Bônus da Arrecadação</option>
+            <option value="box-resumo-1">Resumo - Manhã</option>
+            <option value="box-resumo-2">Resumo - Tarde</option>
+            <option value="box-resumo-3">Resumo - Arrecadação</option>
+            <option value="box-prog-obs">Caixa de Observação da Programação</option>
+            <option value="box-pix">Caixa de Pagamento PIX</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 pt-2">
+          <div class="text-center">
+            <label class="block text-xs font-bold text-gray-600 mb-1">Cor de Fundo</label>
+            <input type="color" id="picker-bg" oninput="aplicarCorAoVivo()" class="w-12 h-12 cursor-pointer border rounded-lg mx-auto block">
+          </div>
+          <div class="text-center">
+            <label class="block text-xs font-bold text-gray-600 mb-1">Cor do Texto</label>
+            <input type="color" id="picker-text" oninput="aplicarCorAoVivo()" class="w-12 h-12 cursor-pointer border rounded-lg mx-auto block">
+          </div>
+          <div class="text-center">
+            <label class="block text-xs font-bold text-gray-600 mb-1">Cor da Borda</label>
+            <input type="color" id="picker-border" oninput="aplicarCorAoVivo()" class="w-12 h-12 cursor-pointer border rounded-lg mx-auto block">
+          </div>
+        </div>
+
+        <div class="pt-4 flex gap-2">
+          <button onclick="fecharPainelCores()" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-bold py-2.5 rounded-lg text-xs uppercase">
+            Concluir Ajuste
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL DE ADMINISTRAÇÃO -->
   <div id="modal-admin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -372,8 +430,8 @@
         <div id="admin-panel-view" class="hidden space-y-4 max-h-[80vh] overflow-y-auto pr-1">
           
           <div class="bg-amber-50 border border-amber-200 p-3 rounded-lg text-center space-y-2">
-            <h4 class="font-extrabold text-amber-900 text-sm">✏️ Edição Individual na Tela</h4>
-            <p class="text-xs text-amber-700">Ative para alterar qualquer texto individualmente com um clique direto!</p>
+            <h4 class="font-extrabold text-amber-900 text-sm">✏️ Edição Visual & Personalização</h4>
+            <p class="text-xs text-amber-700">Ative para alterar textos e trocar as cores de cada caixa individualmente!</p>
             <button onclick="ativarEdicaoDireta()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2 px-4 rounded shadow transition">
               Ativar Edição Visual
             </button>
@@ -474,6 +532,7 @@
 
     let todosProdutos = [];
     let senhaAtualAdmin = "admin123";
+    let estilizacoes = {};
 
     const produtosIniciais = [
       { ordem: 1, nome: "Salgados", preco: 5.00, desc: "Coxinha, Risoles de carne/pizza, Enroladinho de salsicha, Hamburgão e Esfiha de carne", foto: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=400" },
@@ -503,12 +562,12 @@
     }
     carregarSenhaConfig();
 
-    // LEITURA INDIVIDUAL DE CADA CAMPO DO FIREBASE
+    // LEITURA INDIVIDUAL DE CADA CAMPO E ESTILOS DO FIREBASE
     onSnapshot(doc(db, "config", "textos"), (docSnap) => {
       if (docSnap.exists()) {
         const t = docSnap.data();
         
-        // Percorre cada elemento editável na página e carrega seu valor individual
+        // Carrega os textos editáveis
         const campos = document.querySelectorAll('.editable-field');
         campos.forEach(el => {
           const key = el.id.replace('field-', '');
@@ -516,8 +575,25 @@
             el.innerHTML = t[key];
           }
         });
+
+        // Carrega os estilos customizados de cores das caixas
+        if (t._estilos) {
+          estilizacoes = t._estilos;
+          aplicarEstilosNasCaixas(estilizacoes);
+        }
       }
     });
+
+    function aplicarEstilosNasCaixas(estilos) {
+      Object.keys(estilos).forEach(boxId => {
+        const box = document.getElementById(boxId);
+        if (box) {
+          if (estilos[boxId].bg) box.style.backgroundColor = estilos[boxId].bg;
+          if (estilos[boxId].text) box.style.color = estilos[boxId].text;
+          if (estilos[boxId].border) box.style.borderColor = estilos[boxId].border;
+        }
+      });
+    }
 
     // ESCUTAR PRODUTOS DO FIREBASE E ORDENAR
     onSnapshot(collection(db, "produtos"), (snapshot) => {
@@ -526,7 +602,6 @@
         todosProdutos.push({ id: doc.id, ...doc.data() });
       });
 
-      // Ordena do menor número de ordem para o maior
       todosProdutos.sort((a, b) => (Number(a.ordem) || 999) - (Number(b.ordem) || 999));
 
       renderizarProdutos(todosProdutos);
@@ -668,7 +743,7 @@
       document.getElementById('form-title').innerText = "Adicionar Novo Item de Venda";
     };
 
-    /* MODO DE EDIÇÃO INDIVIDUAL DIRETA NA PÁGINA */
+    /* MODO DE EDIÇÃO VISUAL E CORES */
     window.ativarEdicaoDireta = function() {
       fecharModalAdmin();
       document.getElementById('barra-edicao-direta').classList.remove('hidden');
@@ -679,7 +754,7 @@
         el.classList.add('editando-ativo');
       });
 
-      alert("Modo de Edição Individual Ativo!\n\nCada texto destacado possui edição independente. Clique no trecho desejado para modificar e depois em 'Salvar Alterações'.");
+      alert("Modo de Edição Ativo!\n\n• Clique no texto para alterar o conteúdo.\n• Clique em '🎨 Personalizar Cores' para escolher as cores de fundo, bordas e textos!");
     };
 
     window.desativarEdicaoDireta = function() {
@@ -692,7 +767,52 @@
       });
     };
 
-    // SALVAMENTO MAPEADO CAMPO A CAMPO
+    /* PAINEL E CONTROLE DE CORES */
+    window.abrirPainelCores = function() {
+      document.getElementById('modal-cores').classList.remove('hidden');
+      carregarCoresBoxSelecionada();
+    };
+
+    window.fecharPainelCores = function() {
+      document.getElementById('modal-cores').classList.add('hidden');
+    };
+
+    function rgbToHex(rgbStr) {
+      if (!rgbStr || rgbStr === 'transparent') return '#ffffff';
+      if (rgbStr.startsWith('#')) return rgbStr;
+      const rgb = rgbStr.match(/\d+/g);
+      if (!rgb || rgb.length < 3) return '#ffffff';
+      return '#' + ((1 << 24) + (parseInt(rgb[0]) << 16) + (parseInt(rgb[1]) << 8) + parseInt(rgb[2])).toString(16).slice(1);
+    }
+
+    window.carregarCoresBoxSelecionada = function() {
+      const boxId = document.getElementById('select-box-target').value;
+      const box = document.getElementById(boxId);
+      if (!box) return;
+
+      const style = window.getComputedStyle(box);
+      document.getElementById('picker-bg').value = rgbToHex(box.style.backgroundColor || style.backgroundColor);
+      document.getElementById('picker-text').value = rgbToHex(box.style.color || style.color);
+      document.getElementById('picker-border').value = rgbToHex(box.style.borderColor || style.borderColor);
+    };
+
+    window.aplicarCorAoVivo = function() {
+      const boxId = document.getElementById('select-box-target').value;
+      const box = document.getElementById(boxId);
+      if (!box) return;
+
+      const bg = document.getElementById('picker-bg').value;
+      const text = document.getElementById('picker-text').value;
+      const border = document.getElementById('picker-border').value;
+
+      box.style.backgroundColor = bg;
+      box.style.color = text;
+      box.style.borderColor = border;
+
+      estilizacoes[boxId] = { bg, text, border };
+    };
+
+    // SALVAMENTO MAPEADO DO TEXTO E DAS CORES NO FIREBASE
     window.salvarEdicaoDireta = async function() {
       try {
         const dadosParaSalvar = {};
@@ -703,10 +823,13 @@
           dadosParaSalvar[key] = el.innerHTML;
         });
 
+        // Salva os estilos das cores junto no objeto
+        dadosParaSalvar['_estilos'] = estilizacoes;
+
         await setDoc(doc(db, "config", "textos"), dadosParaSalvar, { merge: true });
         
         desativarEdicaoDireta();
-        alert("Todos os campos individuais foram salvos no Firebase com sucesso!");
+        alert("Todos os textos e personalizações de cores foram salvos no Firebase!");
       } catch (e) {
         alert("Erro ao salvar no Firebase: " + e.message);
       }
