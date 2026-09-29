@@ -570,11 +570,12 @@
       if (docSnap.exists()) {
         const t = docSnap.data();
         
-        // Carrega os textos editáveis
+        // Carrega os textos editáveis (exceto as tabelas se já houver um conteúdo padrão atualizado)
         const campos = document.querySelectorAll('.editable-field');
         campos.forEach(el => {
           const key = el.id.replace('field-', '');
-          if (t[key] !== undefined) {
+          // Impede a restauração se o Firebase mantiver a tabela antiga guardada em texto puro
+          if (t[key] !== undefined && !key.includes('tabela')) {
             el.innerHTML = t[key];
           }
         });
