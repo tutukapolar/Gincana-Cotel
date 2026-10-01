@@ -29,7 +29,6 @@
       opacity: 1;
     }
 
-    /* Estilo para edição individual quando ativo */
     .editando-ativo {
       outline: 2px dashed #f57c00 !important;
       outline-offset: 2px;
@@ -78,14 +77,17 @@
       </div>
 
       <!-- MENU DE NAVEGAÇÃO -->
-      <div class="flex items-center space-x-2 md:space-x-6 text-sm font-semibold uppercase">
-        <button onclick="mudarAba('regras')" id="tab-regras" class="nav-tab active py-2 px-3 flex items-center gap-2">
+      <div class="flex flex-wrap justify-center items-center gap-2 md:gap-4 text-xs md:text-sm font-semibold uppercase">
+        <button onclick="mudarAba('regras')" id="tab-regras" class="nav-tab active py-2 px-3 flex items-center gap-1.5">
           <i class="fa-solid fa-circle-info"></i> Regras & Arrecadação
         </button>
-        <button onclick="mudarAba('programacao')" id="tab-programacao" class="nav-tab py-2 px-3 flex items-center gap-2">
+        <button onclick="mudarAba('programacao')" id="tab-programacao" class="nav-tab py-2 px-3 flex items-center gap-1.5">
           <i class="fa-solid fa-star"></i> Programação & Pontos
         </button>
-        <button onclick="mudarAba('vendas')" id="tab-vendas" class="nav-tab py-2 px-3 flex items-center gap-2">
+        <button onclick="mudarAba('ganhadores')" id="tab-ganhadores" class="nav-tab py-2 px-3 flex items-center gap-1.5">
+          <i class="fa-solid fa-trophy text-amber-300"></i> Ganhadores
+        </button>
+        <button onclick="mudarAba('vendas')" id="tab-vendas" class="nav-tab py-2 px-3 flex items-center gap-1.5">
           <i class="fa-solid fa-store"></i> Nossa Lojinha
         </button>
       </div>
@@ -114,9 +116,7 @@
           Cada sala deverá arrecadar chocolates ao longo do período da gincana. A quantidade arrecadada será contabilizada e convertida em pontos. Além disso, teremos o dia dedicado às atividades esportivas. A soma total definirá a sala campeã!
         </p>
 
-        <!-- CARDS INDIVIDUAIS DE PONTUAÇÃO -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-          
           <div id="box-card1" class="box-personalizavel p-4 border rounded text-center bg-gray-50 flex flex-col items-center justify-center">
             <img src="https://img.icons8.com/fluency/96/candy.png" alt="Saco de Bombom" class="w-20 h-20 object-contain mb-2">
             <h4 id="field-card1-nome" class="font-bold text-gray-800 editable-field">1 Saco de Bombom</h4>
@@ -134,7 +134,6 @@
             <h4 id="field-card3-nome" class="font-bold text-gray-800 editable-field">1 Caixa Bis / Hershey's</h4>
             <p id="field-card3-pontos" class="text-xl font-extrabold text-cotel mt-1 editable-field">1 Ponto</p>
           </div>
-
         </div>
 
         <div id="box-regras-bonus" class="box-personalizavel p-4 bg-teal-50 border border-teal-200 rounded text-center text-sm font-semibold text-cotel">
@@ -154,7 +153,6 @@
         </p>
       </div>
 
-      <!-- CRONOGRAMA RESUMIDO INDIVIDUAL -->
       <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
           <i class="fa-solid fa-clock text-cotel"></i> Resumo do Dia
@@ -175,7 +173,6 @@
         </div>
       </div>
 
-      <!-- PROGRAMAÇÃO POR HORÁRIOS -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div class="bg-cotel text-white px-6 py-4">
           <h3 class="font-extrabold uppercase text-lg flex items-center gap-2">
@@ -184,7 +181,6 @@
         </div>
         
         <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- MANHÃ -->
           <div>
             <h4 class="font-bold text-teal-800 border-b-2 border-teal-600 pb-2 mb-3 uppercase text-sm flex items-center gap-2">
               <i class="fa-solid fa-sun text-amber-500"></i> Manhã
@@ -216,7 +212,6 @@
             </div>
           </div>
 
-          <!-- TARDE -->
           <div>
             <h4 class="font-bold text-teal-800 border-b-2 border-teal-600 pb-2 mb-3 uppercase text-sm flex items-center gap-2">
               <i class="fa-solid fa-moon text-blue-500"></i> Tarde
@@ -245,14 +240,12 @@
             </div>
 
             <div id="box-prog-obs" class="box-personalizavel mt-4 p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 font-medium">
-              <span id="field-prog-obs" class="editable-field">⚠️ <strong>Obs.:</strong> Se a turma deixar de jogar alguma modalidade, não receberá pontuação por esse esporte.</span>
+              <span id="field-prog-obs" class="editable-field">⚠️️ <strong>Obs.:</strong> Se a turma deixar de jogar alguma modalidade, não receberá pontuação por esse esporte.</span>
             </div>
           </div>
-
         </div>
       </div>
 
-      <!-- TABELA DE PONTUAÇÃO -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
           <h3 class="font-bold text-gray-800">Pontuação por Modalidade</h3>
@@ -285,10 +278,29 @@
         </div>
       </div>
     </section>
+
+    <!-- 3ª ABA: GANHADORES / PLACAR (NOVA) -->
+    <section id="conteudo-ganhadores" class="space-y-6 hidden">
+      <div class="border-b border-gray-200 pb-4 text-center md:text-left">
+        <h2 id="field-ganhadores-titulo" class="text-2xl font-extrabold text-cotel flex items-center justify-center md:justify-start gap-2 uppercase editable-field">
+          🏆 GANHADORES DA GINCANA COTEL
+        </h2>
+        <p id="field-ganhadores-subtitulo" class="text-sm text-gray-500 editable-field">
+          Confira o resultado oficial e a pontuação detalhada do Interclasse
+        </p>
+      </div>
+
+      <!-- CARDS DO PODIO DE GANHADORES -->
+      <div id="grid-ganhadores" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"></div>
+
+      <div id="ganhadores-vazio" class="hidden py-12 text-center text-gray-400 space-y-3">
+        <i class="fa-solid fa-trophy text-5xl opacity-40"></i>
+        <p class="text-base font-medium">Nenhum resultado de ganhador cadastrado no momento.</p>
+      </div>
+    </section>
     
-    <!-- 3ª ABA: NOSSA LOJINHA / VENDAS -->
+    <!-- 4ª ABA: NOSSA LOJINHA / VENDAS -->
     <section id="conteudo-vendas" class="space-y-6 hidden">
-      <!-- CABEÇALHO DA LOJA -->
       <div class="border-b border-gray-200 pb-4">
         <h2 id="field-loja-titulo" class="text-2xl font-extrabold text-cotel flex items-center gap-2 uppercase editable-field">
           🛒 ITENS À VENDA NA GINCANA
@@ -296,7 +308,6 @@
         <p id="field-loja-horario" class="text-sm text-gray-500 editable-field">Durante o intervalo, das 9h20 às 10h, e no período da tarde, o 2º ano estará vendendo salgados e doces em frente à academia da área de esportes.</p>
       </div>
 
-      <!-- INFORMAÇÃO PIX INDIVIDUAL -->
       <div id="box-pix" class="box-personalizavel bg-blue-50 border border-blue-200 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
         <div class="flex items-center gap-3">
           <i class="fa-solid fa-qrcode text-3xl text-cotel"></i>
@@ -308,7 +319,6 @@
         <span id="field-pix-tag" class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-bold editable-field">Vendas no intervalo e à tarde</span>
       </div>
 
-      <!-- LISTA DE PRODUTOS CADASTRADOS NO FIREBASE -->
       <div id="grid-produtos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
       <div id="loja-vazia" class="hidden py-12 text-center text-gray-400 space-y-3">
@@ -319,7 +329,7 @@
 
   </main>
 
-  <!-- RODAPÉ INDIVIDUAL -->
+  <!-- RODAPÉ -->
   <footer class="bg-cotel text-white mt-12 py-8 border-t-4 border-cotel-dark">
     <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
       <div>
@@ -342,7 +352,6 @@
       </div>
     </div>
 
-    <!-- ÁREA DE RESTRITA / ADMIN NO RODAPÉ -->
     <div class="max-w-6xl mx-auto px-4 mt-8 pt-4 border-t border-teal-700/50 flex justify-between items-center text-xs text-teal-200">
       <p>© Gincana COTEL - Todos os direitos reservados</p>
       <button onclick="abrirModalAdmin()" class="bg-cotel-dark hover:bg-teal-900 text-teal-100 hover:text-white px-3 py-1.5 rounded-lg border border-teal-600 transition flex items-center gap-1.5 font-semibold">
@@ -351,7 +360,7 @@
     </div>
   </footer>
 
-  <!-- MODAL DE CORES DA CAIXA SELECIONADA -->
+  <!-- MODAL DE CORES -->
   <div id="modal-cores" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-gray-100">
       <div class="bg-purple-700 text-white px-6 py-4 flex justify-between items-center">
@@ -440,14 +449,65 @@
             </button>
           </div>
 
-          <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg flex items-center justify-between gap-2">
-            <div>
-              <h5 class="font-bold text-xs text-blue-900">Produtos Padrão</h5>
-              <p class="text-[11px] text-blue-700">Cadastra os produtos iniciais no Firebase para você alterar imagens e descrições.</p>
-            </div>
-            <button onclick="popularBancoProdutos()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-1.5 px-3 rounded shadow shrink-0">
+          <!-- BOTÕES DE INICIALIZAÇÃO RÁPIDA -->
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="popularBancoProdutos()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2 px-2 rounded shadow">
               ⚡ Cadastrar Produtos
             </button>
+            <button onclick="popularBancoGanhadores()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2 px-2 rounded shadow">
+              🏆 Cadastrar Placar Inicial
+            </button>
+          </div>
+
+          <hr>
+
+          <!-- GERENCIAR GANHADORES / TURMAS -->
+          <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-200 space-y-3">
+            <h4 class="font-bold text-sm text-gray-800 uppercase border-b pb-2" id="form-ganhador-title">
+              Adicionar/Editar Turma no Placar
+            </h4>
+            <input type="hidden" id="ganhador-id">
+            
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-bold text-gray-600">Turma / Ano</label>
+                <input type="text" id="ganhador-turma" placeholder="Ex: 2º ano" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-600">Posição (1, 2 ou 3)</label>
+                <input type="number" id="ganhador-posicao" placeholder="1" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-bold text-gray-600">Pontos Totais</label>
+                <input type="number" id="ganhador-pontos" placeholder="8075" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-600">Pontos Arrecadação</label>
+                <input type="number" id="ganhador-arrecadacao" placeholder="3425" class="w-full px-3 py-1.5 border rounded text-sm bg-white">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-600">Detalhamento dos Esportes (Linha por Linha)</label>
+              <textarea id="ganhador-detalhes" rows="3" placeholder="Futebol Feminino: 500pts&#10;Futebol Masculino: 700pts&#10;Vôlei: 700pts" class="w-full px-3 py-1.5 border rounded text-sm bg-white"></textarea>
+            </div>
+
+            <div class="flex gap-2 pt-1">
+              <button onclick="salvarGanhador()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 rounded text-xs uppercase">
+                Salvar Turma
+              </button>
+              <button onclick="limparFormGanhador()" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold px-3 py-2 rounded text-xs uppercase">
+                Cancelar
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-xs text-gray-500 uppercase mb-2">Turmas Cadastradas no Placar:</h4>
+            <div id="admin-ganhadores-list" class="max-h-36 overflow-y-auto divide-y border rounded-lg bg-white"></div>
           </div>
 
           <hr>
@@ -495,8 +555,8 @@
           </div>
 
           <div>
-            <h4 class="font-bold text-xs text-gray-500 uppercase mb-2">Itens no Banco de Dados:</h4>
-            <div id="admin-prod-list" class="max-h-40 overflow-y-auto divide-y border rounded-lg bg-white"></div>
+            <h4 class="font-bold text-xs text-gray-500 uppercase mb-2">Itens de Venda no Banco:</h4>
+            <div id="admin-prod-list" class="max-h-36 overflow-y-auto divide-y border rounded-lg bg-white"></div>
           </div>
 
           <div class="pt-2 border-t flex justify-between items-center text-xs">
@@ -534,6 +594,7 @@
     const db = getFirestore(app);
 
     let todosProdutos = [];
+    let todosGanhadores = [];
     let senhaAtualAdmin = "admin123";
     let estilizacoes = {};
 
@@ -545,6 +606,31 @@
       { ordem: 5, nome: "Combo 1: Salgado + Refri/Suco", preco: 6.00, desc: "Qualquer salgado + 1 copo de bebida", foto: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400" },
       { ordem: 6, nome: "Combo 2: Brownie + Refri/Suco", preco: 6.00, desc: "1 Brownie + 1 copo de bebida", foto: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400" },
       { ordem: 7, nome: "Combo 3: Salgado + Brownie + Refri/Suco", preco: 10.00, desc: "Combo completo!", foto: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400" }
+    ];
+
+    // DADOS INICIAIS EXTRAÍDOS DA IMAGEM DA GINCANA COTEL 2026
+    const ganhadoresIniciais = [
+      {
+        posicao: 1,
+        turma: "2º ano",
+        pontosTotais: 8075,
+        pontosArrecadacao: 3425,
+        detalhes: "Futebol Feminino: 500pts\nFutebol Masculino: 700pts\nVôlei: 700pts\nBasquete: 1000pts\nPresença: 1000pts\nTorta na cara: 250pts\nPimbolim: 500pts"
+      },
+      {
+        posicao: 2,
+        turma: "3º ano",
+        pontosTotais: 6164,
+        pontosArrecadacao: 2214,
+        detalhes: "Futebol Feminino: 1000pts\nFutebol Masculino: 500pts\nVôlei: 500pts\nBasquete: 500pts\nPresença: 700pts\nTorta na cara: 500pts\nPimbolim: 250pts"
+      },
+      {
+        posicao: 3,
+        turma: "1º ano",
+        pontosTotais: 5235,
+        pontosArrecadacao: 1135,
+        detalhes: "Futebol Feminino: 700pts\nFutebol Masculino: 1000pts\nVôlei: 1000pts\nBasquete: 700pts\nPresença: 500pts\nTorta na cara: 100pts\nPimbolim: 100pts"
+      }
     ];
 
     async function carregarSenhaConfig() {
@@ -565,22 +651,18 @@
     }
     carregarSenhaConfig();
 
-    // LEITURA INDIVIDUAL DE CADA CAMPO E ESTILOS DO FIREBASE
+    // ESCUTAR CONFIGURAÇÕES DE TEXTOS E ESTILOS
     onSnapshot(doc(db, "config", "textos"), (docSnap) => {
       if (docSnap.exists()) {
         const t = docSnap.data();
-        
-        // Carrega os textos editáveis (exceto as tabelas se já houver um conteúdo padrão atualizado)
         const campos = document.querySelectorAll('.editable-field');
         campos.forEach(el => {
           const key = el.id.replace('field-', '');
-          // Impede a restauração se o Firebase mantiver a tabela antiga guardada em texto puro
           if (t[key] !== undefined && !key.includes('tabela')) {
             el.innerHTML = t[key];
           }
         });
 
-        // Carrega os estilos customizados de cores das caixas
         if (t._estilos) {
           estilizacoes = t._estilos;
           aplicarEstilosNasCaixas(estilizacoes);
@@ -599,7 +681,176 @@
       });
     }
 
-    // ESCUTAR PRODUTOS DO FIREBASE E ORDENAR
+    // ESCUTAR GANHADORES DO FIREBASE E RENDERIZAR
+    onSnapshot(collection(db, "ganhadores"), (snapshot) => {
+      todosGanhadores = [];
+      snapshot.forEach((doc) => {
+        todosGanhadores.push({ id: doc.id, ...doc.data() });
+      });
+
+      todosGanhadores.sort((a, b) => (Number(a.posicao) || 99) - (Number(b.posicao) || 99));
+
+      renderizarGanhadores(todosGanhadores);
+      renderizarListaGanhadoresAdmin(todosGanhadores);
+    });
+
+    window.renderizarGanhadores = function(lista) {
+      const grid = document.getElementById('grid-ganhadores');
+      const vazio = document.getElementById('ganhadores-vazio');
+      grid.innerHTML = '';
+
+      if (lista.length === 0) {
+        vazio.classList.remove('hidden');
+        return;
+      }
+      vazio.classList.add('hidden');
+
+      const estilosPosicao = {
+        1: { medalha: "🥇", corMedalha: "bg-amber-400 text-amber-950", borda: "border-amber-400", bgHeader: "bg-gradient-to-r from-amber-500 to-amber-600" },
+        2: { medalha: "🥈", corMedalha: "bg-slate-300 text-slate-900", borda: "border-slate-300", bgHeader: "bg-gradient-to-r from-slate-400 to-slate-500" },
+        3: { medalha: "🥉", corMedalha: "bg-amber-700 text-amber-100", borda: "border-amber-700", bgHeader: "bg-gradient-to-r from-amber-700 to-amber-800" }
+      };
+
+      lista.forEach(g => {
+        const pos = parseInt(g.posicao) || 1;
+        const est = estilosPosicao[pos] || estilosPosicao[3];
+        
+        const linhasDetalhes = (g.detalhes || '').split('\n').filter(l => l.trim() !== '');
+        let htmlDetalhes = '';
+        linhasDetalhes.forEach(linha => {
+          htmlDetalhes += `<li class="flex justify-between border-b border-dashed border-gray-200 py-1 text-xs"><span>${linha}</span></li>`;
+        });
+
+        grid.innerHTML += `
+          <div class="bg-white rounded-2xl shadow-lg border-2 ${est.borda} overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="${est.bgHeader} text-white p-5 text-center relative">
+                <span class="absolute top-3 left-3 w-8 h-8 ${est.corMedalha} rounded-full flex items-center justify-center font-black text-sm shadow">
+                  ${pos}º
+                </span>
+                <div class="text-4xl mb-1">${est.medalha}</div>
+                <h3 class="text-2xl font-black uppercase tracking-wide">${g.turma}</h3>
+                <p class="text-2xl font-extrabold text-amber-200 mt-1">${g.pontosTotais} <span class="text-xs uppercase font-normal text-white">pts</span></p>
+              </div>
+
+              <div class="p-5 space-y-4">
+                <div>
+                  <h4 class="font-bold text-gray-700 text-xs uppercase mb-2 flex items-center gap-1">
+                    <i class="fa-solid fa-medal text-amber-500"></i> Modalidades
+                  </h4>
+                  <ul class="space-y-1 text-gray-600">
+                    ${htmlDetalhes || '<li class="text-xs text-gray-400 italic">Sem detalhes informados</li>'}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 bg-amber-50 border-t border-amber-100 text-center">
+              <span class="text-xs font-bold text-amber-900 uppercase block">Arrecadação</span>
+              <span class="text-lg font-black text-cotel">${g.pontosArrecadacao} pts</span>
+            </div>
+          </div>
+        `;
+      });
+    };
+
+    window.renderizarListaGanhadoresAdmin = function(lista) {
+      const list = document.getElementById('admin-ganhadores-list');
+      list.innerHTML = '';
+
+      if (lista.length === 0) {
+        list.innerHTML = '<p class="p-3 text-xs text-gray-400 text-center">Nenhum resultado cadastrado. Clique no botão "🏆 Cadastrar Placar Inicial"!</p>';
+        return;
+      }
+
+      lista.forEach(g => {
+        list.innerHTML += `
+          <div class="p-2.5 flex justify-between items-center text-xs">
+            <div>
+              <span class="font-bold text-gray-800">${g.posicao}º Lugar: ${g.turma}</span>
+              <span class="text-cotel font-semibold block">${g.pontosTotais} pts (Arrecadação: ${g.pontosArrecadacao} pts)</span>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="prepararEdicaoGanhador('${g.id}')" class="text-blue-600 hover:text-blue-800 font-bold">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button onclick="excluirGanhador('${g.id}')" class="text-red-500 hover:text-red-700 font-bold">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+    };
+
+    window.popularBancoGanhadores = async function() {
+      if (confirm("Deseja cadastrar os resultados iniciais do placar geral no Firebase?")) {
+        try {
+          for (const item of ganhadoresIniciais) {
+            await addDoc(collection(db, "ganhadores"), item);
+          }
+          alert("Ganhadores e placar cadastrados no Firebase com sucesso!");
+        } catch (e) {
+          alert("Erro ao cadastrar ganhadores: " + e.message);
+        }
+      }
+    };
+
+    window.salvarGanhador = async function() {
+      const id = document.getElementById('ganhador-id').value;
+      const turma = document.getElementById('ganhador-turma').value.trim();
+      const posicao = parseInt(document.getElementById('ganhador-posicao').value);
+      const pontosTotais = parseInt(document.getElementById('ganhador-pontos').value);
+      const pontosArrecadacao = parseInt(document.getElementById('ganhador-arrecadacao').value);
+      const detalhes = document.getElementById('ganhador-detalhes').value.trim();
+
+      if (!turma || isNaN(posicao) || isNaN(pontosTotais)) {
+        alert("Preencha a Turma, Posição e Pontos Totais!");
+        return;
+      }
+
+      try {
+        if (id) {
+          await updateDoc(doc(db, "ganhadores", id), { turma, posicao, pontosTotais, pontosArrecadacao, detalhes });
+        } else {
+          await addDoc(collection(db, "ganhadores"), { turma, posicao, pontosTotais, pontosArrecadacao, detalhes });
+        }
+        limparFormGanhador();
+      } catch (e) {
+        alert("Erro ao salvar ganhador: " + e.message);
+      }
+    };
+
+    window.excluirGanhador = async function(id) {
+      if (confirm("Tem certeza que deseja excluir esta turma do placar?")) {
+        await deleteDoc(doc(db, "ganhadores", id));
+      }
+    };
+
+    window.prepararEdicaoGanhador = function(id) {
+      const g = todosGanhadores.find(item => item.id === id);
+      if (!g) return;
+
+      document.getElementById('ganhador-id').value = g.id;
+      document.getElementById('ganhador-turma').value = g.turma;
+      document.getElementById('ganhador-posicao').value = g.posicao;
+      document.getElementById('ganhador-pontos').value = g.pontosTotais;
+      document.getElementById('ganhador-arrecadacao').value = g.pontosArrecadacao || 0;
+      document.getElementById('ganhador-detalhes').value = g.detalhes || '';
+      document.getElementById('form-ganhador-title').innerText = "Editar Turma no Placar";
+    };
+
+    window.limparFormGanhador = function() {
+      document.getElementById('ganhador-id').value = '';
+      document.getElementById('ganhador-turma').value = '';
+      document.getElementById('ganhador-posicao').value = '';
+      document.getElementById('ganhador-pontos').value = '';
+      document.getElementById('ganhador-arrecadacao').value = '';
+      document.getElementById('ganhador-detalhes').value = '';
+      document.getElementById('form-ganhador-title').innerText = "Adicionar/Editar Turma no Placar";
+    };
+
+    // ESCUTAR PRODUTOS DO FIREBASE
     onSnapshot(collection(db, "produtos"), (snapshot) => {
       todosProdutos = [];
       snapshot.forEach((doc) => {
@@ -816,7 +1067,6 @@
       estilizacoes[boxId] = { bg, text, border };
     };
 
-    // SALVAMENTO MAPEADO DO TEXTO E DAS CORES NO FIREBASE
     window.salvarEdicaoDireta = async function() {
       try {
         const dadosParaSalvar = {};
@@ -827,7 +1077,6 @@
           dadosParaSalvar[key] = el.innerHTML;
         });
 
-        // Salva os estilos das cores junto no objeto
         dadosParaSalvar['_estilos'] = estilizacoes;
 
         await setDoc(doc(db, "config", "textos"), dadosParaSalvar, { merge: true });
@@ -873,10 +1122,12 @@
     function mudarAba(aba) {
       document.getElementById('conteudo-regras').classList.add('hidden');
       document.getElementById('conteudo-programacao').classList.add('hidden');
+      document.getElementById('conteudo-ganhadores').classList.add('hidden');
       document.getElementById('conteudo-vendas').classList.add('hidden');
 
       document.getElementById('tab-regras').classList.remove('active');
       document.getElementById('tab-programacao').classList.remove('active');
+      document.getElementById('tab-ganhadores').classList.remove('active');
       document.getElementById('tab-vendas').classList.remove('active');
 
       document.getElementById('conteudo-' + aba).classList.remove('hidden');
@@ -888,6 +1139,7 @@
     }
 
     function fecharModalAdmin() {
+      document.getElementById('modal-admin').classList.hidden = true;
       document.getElementById('modal-admin').classList.add('hidden');
     }
   </script>
